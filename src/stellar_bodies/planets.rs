@@ -53,7 +53,7 @@ pub enum PlanetType<'a> {
 
 impl<'a> Distribution<PlanetType<'a>> for Standard {
 
-    // TODO: Implement random PlanetType picker weighted by rarity
+    // TODO: Implement random PlanetType picker weighted by rarity instead of linear rng
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> PlanetType<'a> {
         match rng.gen_range(0..=18) {
             0 => PlanetType::new("AW"),
@@ -1554,5 +1554,19 @@ impl<'a> PlanetType<'a> {
     }
 
 
+}
 
+
+#[derive(Debug)]
+pub struct Planet<'a> {
+    name: &'a str,
+    ptype: PlanetType,
+}
+
+impl<'a> Planet<'a> {
+    pub fn new(name: &str, ptype: &str) -> Self {
+        match ptype {
+            _ => return Planet::new(name, ptype),
+        };
+    }
 }
