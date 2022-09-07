@@ -1,5 +1,5 @@
 use std::io;
-use std::io::{Write, Read};
+use std::io::Write;
 use clearscreen;
 use rand::Rng;
 use rand::thread_rng as rng;

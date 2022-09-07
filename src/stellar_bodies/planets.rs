@@ -1601,7 +1601,6 @@ impl<'a> PlanetType<'a> {
                     rotational_period: i.rotational_period,
                 };
             },
-            _ => panic!("Not a valid PlanetType!"),
         };
     }
 
@@ -1622,10 +1621,7 @@ impl<'a> Planet<'a> {
     }
 
     pub fn stats(&self) -> Stats {
-        if let x = &self.ptype {
-            return x.get_stats();
-        }else {
-            panic!("Invalid Planet Type!");
-        };
+        let stats = &self.ptype;
+        stats.get_stats()
     }
 }

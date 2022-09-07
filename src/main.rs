@@ -1,4 +1,4 @@
-use std::{io, thread::sleep};
+use std::thread::sleep;
 use rand::Rng;
 use oasis::{cls, dur, flush, input, create_random_star, create_random_planet};
 use oasis::stellar_bodies::stars::Star;
@@ -20,7 +20,7 @@ fn main() {
         print!(" Would you like to boot into StellarOS? [Y/n] #> ");
 
         flush();
-        let mut answer: String = input();
+        let answer: String = input();
 
         for chr in answer.chars() {
             let chr = chr.to_lowercase().to_string();
