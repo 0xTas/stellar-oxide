@@ -42,7 +42,7 @@ fn main() {
 
                 // println!(" Your Star: {:#?}", current_star);
                 println!(" You've been here for quite some time already...");
-                println!(" Your current location is the system {}.\n It is a remote {} located on the far side of the galaxy.", current_star.name, current_star.class_name());
+                println!(" Your current location is the system {}.\n It is a remote {} located on the far side of the galaxy.", current_star.name, current_star.stats().class_name);
                 flush();
                 sleep(dur(7000));
                 
