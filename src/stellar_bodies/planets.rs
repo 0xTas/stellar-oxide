@@ -55,8 +55,26 @@ impl<'a> Distribution<PlanetType<'a>> for Standard {
 
     // TODO: Implement random PlanetType picker weighted by rarity
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> PlanetType<'a> {
-        match rng.gen_range(0..19) {
-            0 => PlanetType::AW(())
+        match rng.gen_range(0..=18) {
+            0 => PlanetType::new("AW"),
+            1 => PlanetType::new("WW"),
+            2 => PlanetType::new("WG"),
+            3 => PlanetType::new("RKB"),
+            4 => PlanetType::new("ICB"),
+            5 => PlanetType::new("ELW"),
+            6 => PlanetType::new("HMC"),
+            7 => PlanetType::new("RIW"),
+            8 => PlanetType::new("MRB"),
+            9 => PlanetType::new("HGG"),
+            10 => PlanetType::new("GGGG"),
+            11 => PlanetType::new("CIGG"),
+            12 => PlanetType::new("CIIGG"),
+            13 => PlanetType::new("CIIIGG"),
+            14 => PlanetType::new("CIVGG"),
+            15 => PlanetType::new("CVGG"),
+            16 => PlanetType::new("HRGG"),
+            17 => PlanetType::new("GGWABL"),
+            18 => PlanetType::new("GGWWBL"),
         }
     }
 }
@@ -435,7 +453,7 @@ impl<'a> PlanetType<'a> {
                 let landable: bool = is_landable(surface_pressure, surface_temp);
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
-                return Self::CHANGEME(PlanetTypeProperties {
+                return Self::ICB(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
@@ -1534,4 +1552,7 @@ impl<'a> PlanetType<'a> {
             },
         }
     }
+
+
+
 }
