@@ -7,6 +7,7 @@ The finished game would have an adventure mode that allows you to travel to rand
 meet NPC characters and learn about their stories, explore and discover galactic mysteries,
 and write entries about your adventure in a daily captains-log, which will help you catalogue your experience.
 
-There should also be a freeform mode that allows the player to generate star systems according to their own parameters,
+There should also be a freeform mode that allows the player to generate and visit star systems according to their own parameters,
 intended as a journaling tool to be paired with actual exploration in Elite Dangerous.
-Store system info and written journal logs about your records and other exploration findings, etc.
+Store system info and written journal logs about your records and other exploration findings, 
+use it as a companion app to keep a journal of your expedition, etc.
