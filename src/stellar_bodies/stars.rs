@@ -11,6 +11,13 @@ pub struct ClassInfo<'a> {
 }
 
 #[derive(Debug)]
+pub struct Stats {
+    pub class_name: &'a str,
+    pub can_fuel_scoop: bool,
+    pub can_fsd_boost: bool,
+}
+
+#[derive(Debug)]
 pub enum StarClass<'a> {
     O(ClassInfo<'a>),
     B(ClassInfo<'a>),
@@ -79,59 +86,20 @@ impl<'a> StarClass<'a> {
         }
     }
 
-    pub fn class_name(&self) -> &str {
-            match self {
-                Self::O(info) => {
-                    return info.type_name;
-                },
-                Self::B(info) => {
-                    return info.type_name;
-                },
-                Self::A(info) => {
-                    return info.type_name;
-                },
-                Self::F(info) => {
-                    return info.type_name;
-                },
-                Self::G(info) => {
-                    return info.type_name;
-                },
-                Self::K(info) => {
-                    return info.type_name;
-                },
-                Self::M(info) => {
-                    return info.type_name;
-                },
-                Self::L(info) => {
-                    return info.type_name;
-                },
-                Self::T(info) => {
-                    return info.type_name;
-                },
-                Self::Y(info) => {
-                    return info.type_name;
-                },
-                Self::Proto(info) => {
-                    return info.type_name;
-                },
-                Self::Carbon(info) => {
-                    return info.type_name;
-                },
-                Self::WR(info) => {
-                    return info.type_name;
-                },
-                Self::WD(info) => {
-                    return info.type_name;
-                },
-                Self::NS(info) => {
-                    return info.type_name;
-                },
-                Self::BH(info) => {
-                    return info.type_name;
-                },
-            };
-
-
+    fn extract_stats(&self) -> Stats {
+        match self {
+            Self::O(i) | Self::B(i) | Self::A(i) | Self::F(i)
+             | Self::G(i) | Self::K(i) | Self::M(i) | Self::L(i) | Self::T(i) 
+             | Self::Y(i) | Self::Proto(i) | Self::Carbon(i) | Self::WR(i) | Self::WD(i)
+             | Self::NS(i) | Self::BH(i) =>
+             {
+                return Stats{
+                    class_name: i.type_name,
+                    can_fuel_scoop: i.scoopable,
+                    can_fsd_boost: i.boostable,
+                };
+             },
+        };
     }
 
 
@@ -154,7 +122,8 @@ impl<'a> Star<'a> {
         }
     }
 
-    pub fn class_name(&self) -> &str {
-        self.class.class_name()
+    pub fn stats(&self) -> Stats {
+        let x: &StarClass = &self.class;
+        x.extract_stats()
     }
 }
