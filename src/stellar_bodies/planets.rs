@@ -1572,7 +1572,7 @@ impl<'a> PlanetType<'a> {
         }
     }
 
-    fn get_stats(&self) -> Stats {
+    fn extract_stats(&self) -> Stats {
 
         // TODO: Potentially write a macro for getting values from the enum variants instead
         match self {
@@ -1622,6 +1622,6 @@ impl<'a> Planet<'a> {
 
     pub fn stats(&self) -> Stats {
         let stats = &self.ptype;
-        stats.get_stats()
+        stats.extract_stats()
     }
 }
