@@ -8,25 +8,6 @@ use rand::{
 
 
 #[derive(Debug)]
-pub struct Stats<'a> {
-    pub ringed: bool,
-    pub type_name: &'a str,
-    pub description: &'a str,
-    pub rarity: &'a str,
-    pub landable: bool,
-    pub explorable: bool,
-    pub dist_from_arrival: f64,
-    pub surface_temp: i32,
-    pub surface_pressure: f64,
-    pub radius: f64,
-    pub earth_masses: f64,
-    pub gravity: f64,
-    pub orbital_period: Duration,
-    pub rotational_period: Duration,
-}
-
-
-#[derive(Debug)]
 pub struct PlanetTypeProperties<'a> {
     pub ringed: bool,
     pub type_name: &'a str,
@@ -46,6 +27,23 @@ pub struct PlanetTypeProperties<'a> {
     pub rotational_period: Duration,
 }
 
+#[derive(Debug)]
+pub struct Stats<'a> {
+    pub ringed: bool,
+    pub type_name: &'a str,
+    pub description: &'a str,
+    pub rarity: &'a str,
+    pub landable: bool,
+    pub explorable: bool,
+    pub dist_from_arrival: f64,
+    pub surface_temp: i32,
+    pub surface_pressure: f64,
+    pub radius: f64,
+    pub earth_masses: f64,
+    pub gravity: f64,
+    pub orbital_period: Duration,
+    pub rotational_period: Duration,
+}
 
 #[derive(Debug)]
 pub enum PlanetType<'a> {
