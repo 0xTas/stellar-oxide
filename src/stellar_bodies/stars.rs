@@ -3,13 +3,6 @@ use rand::{
     Rng,
 };
 
-pub struct ClassProperties<'a> {
-    pub label: &'a str,
-    pub type_name: &'a str,
-    pub scoopable: bool,
-    pub boostable: bool,
-}
-
 #[derive(Debug)]
 pub struct ClassInfo<'a> {
     pub type_name: &'a str,
