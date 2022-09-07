@@ -79,7 +79,7 @@ impl<'a> PlanetType<'a> {
                 };
 
                 const MIN_DIST: u32 = 7;
-                const MAX_DIST: u32 = 817190;
+                const MAX_DIST: u32 = 81_7190;
                 let dist_from_arrival: u32 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
                 const MIN_TEMP: i32 = 27;
@@ -87,15 +87,15 @@ impl<'a> PlanetType<'a> {
                 let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_PRESSURE: f64 = 0.0;
-                const MAX_PRESSURE: f64 = 4983498.11683198;
+                const MAX_PRESSURE: f64 = 4_983_498.11683198;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 2699.66775;
-                const MAX_RADIUS: f64 = 30741.622;
+                const MIN_RADIUS: f64 = 2_699.66775;
+                const MAX_RADIUS: f64 = 30_741.622;
                 let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
 
                 const MIN_MASSES: f64 = 0.07346;
-                const MAX_MASSES: f64 = 1327.610718;
+                const MAX_MASSES: f64 = 1_327.610718;
                 let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
 
                 const MIN_GRAVITY: f64 = 0.249672518138;
@@ -103,15 +103,15 @@ impl<'a> PlanetType<'a> {
                 let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
 
                 const MIN_ORBITAL: f64 = 0.258450279086;
-                const MAX_ORBITAL: f64 = 747992.070736713;
+                const MAX_ORBITAL: f64 = 747_992.070736713;
                 let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
-                let orbital_secs: f64 = orbital_range * 86400.0;
+                let orbital_secs: f64 = orbital_range * 86_400.0;
                 let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
 
                 const MIN_ROTATIONAL: f64 = 0.211842411736;
-                const MAX_ROTATIONAL: f64 = 4442.4380215662;
+                const MAX_ROTATIONAL: f64 = 4_442.4380215662;
                 let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
-                let rotational_secs: f64 = rotational_range * 86400.0;
+                let rotational_secs: f64 = rotational_range * 86_400.0;
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
 
@@ -148,44 +148,114 @@ impl<'a> PlanetType<'a> {
                     description = "TODO";
                 };
 
-                const MIN_DIST: u32 = 69;
-                const MAX_DIST: u32 = 420;
+                const MIN_DIST: u32 = 3;
+                const MAX_DIST: u32 = 4_217_470;
                 let dist_from_arrival: u32 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 69;
-                const MAX_TEMP: i32 = 420;
+                const MIN_TEMP: i32 = 150;
+                const MAX_TEMP: i32 = 902;
                 let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
-                const MIN_PRESSURE: f64 = 69.0; 
-                const MAX_PRESSURE: f64 = 420.0;
+                const MIN_PRESSURE: f64 = 0.07; 
+                const MAX_PRESSURE: f64 = 6_319_180.5;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 69.0;
-                const MAX_RADIUS: f64 = 420.0;
+                const MIN_RADIUS: f64 = 2_640.894;
+                const MAX_RADIUS: f64 = 29_011.342;
                 let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
 
-                const MIN_MASSES: f64 = 69.0;
-                const MAX_MASSES: f64 = 420.0;
+                const MIN_MASSES: f64 = 0.0687;
+                const MAX_MASSES: f64 = 741.438171;
                 let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
 
-                const MIN_GRAVITY: f64 = 69.0;
-                const MAX_GRAVITY: f64 = 420.0;
+                const MIN_GRAVITY: f64 = 0.250068247718;
+                const MAX_GRAVITY: f64 = 46.013426658406;
                 let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
 
-                const MIN_ORBITAL: f64 = 69.0;
-                const MAX_ORBITAL: f64 = 420.0;
+                const MIN_ORBITAL: f64 = 0.003370370512;
+                const MAX_ORBITAL: f64 = 570_992.687407407;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.124829452037; // Tidal Egg
+                const MAX_ROTATIONAL: f64 = 71_900.1459814641;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = rotational_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                return Self::WW(PlanetTypeProperties {
+                    ringed,
+                    type_name,
+                    description,
+                    dist_from_arrival,
+                    low_temp: MIN_TEMP,
+                    high_temp: MAX_TEMP,
+                    surface_temp,
+                    surface_pressure,
+                    radius,
+                    earth_masses,
+                    gravity,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "WG" => { // Water Giant
+                let ringed: bool = decide_ringed();
+
+                let type_name: &str;
+                if ringed {
+                    type_name = "Ringed Water Giant";
+                }else {
+                    type_name = "Water Giant";
+                };
+
+                let description: &str;
+                if ringed {
+                    description = "CHANGE ME (WITH RINGS)";
+                }else {
+                    description = "CHANGE ME";
+                };
+
+                const MIN_DIST: u32 = 21;
+                const MAX_DIST: u32 = 690_129;
+                let dist_from_arrival: u32 = rng().gen_range(MIN_DIST..=MAX_DIST);
+
+                const MIN_TEMP: i32 = 136;
+                const MAX_TEMP: i32 = 2_715;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_PRESSURE: f64 = 1337.4206969;
+                const MAX_PRESSURE: f64 = 29_501_937_664.0;
+                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+
+                const MIN_RADIUS: f64 = 15_892.973;
+                const MAX_RADIUS: f64 = 30_942.572;
+                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_MASSES: f64 = 17.23122;
+                const MAX_MASSES: f64 = 1_961.928589;
+                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+
+                const MIN_GRAVITY: f64 = 2.298430556431;
+                const MAX_GRAVITY: f64 = 193.710734791427;
+                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+
+                const MIN_ORBITAL: f64 = 0.780787489155;
+                const MAX_ORBITAL: f64 = 38_728.2255623079;
                 let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
                 let orbital_secs: f64 = orbital_range * 86400.0;
                 let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
 
-                const MIN_ROTATIONAL: f64 = 69.0;
-                const MAX_ROTATIONAL: f64 = 420.0;
+                const MIN_ROTATIONAL: f64 = 0.159246328854;
+                const MAX_ROTATIONAL: f64 = 3_489.59481481481;
                 let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
                 let rotational_secs: f64 = rotational_range * 86400.0;
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
 
-                return Self::WW(PlanetTypeProperties {
+                return Self::CHANGEME(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
@@ -209,14 +279,14 @@ impl<'a> PlanetType<'a> {
 
                 // let type_name: &str;
                 // if ringed {
-                //     type_name = "CHANGE ME";
+                //     type_name = "CHANGE ME (WITH RINGS)";
                 // }else {
                 //     type_name = "CHANGE ME";
                 // };
 
                 // let description: &str;
                 // if ringed {
-                //     description = "CHANGE ME";
+                //     description = "CHANGE ME (WITH RINGS)";
                 // }else {
                 //     description = "CHANGE ME";
                 // };
