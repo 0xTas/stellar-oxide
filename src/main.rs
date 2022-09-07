@@ -47,11 +47,13 @@ fn main() {
                 sleep(dur(7000));
                 
                 let random_planet: Planet = create_random_planet();
-
+                println!();
                 println!(" There is one interesting body in this system, you stayed around for a few days to examine it further.");
                 flush();
-                sleep(dur(420));
-                println!(" These are the details you discovered about the {} planet known as {}:\n {:#?}", random_planet.stats().type_name, random_planet.name, random_planet);
+                sleep(dur(2420));
+                println!();
+                let get = random_planet.stats();
+                println!(" These are the details you discovered about the {} known as {}:\n {:#?}\n", get.type_name, random_planet.name, random_planet);
                 flush();
                 sleep(dur(60000));
                 break;
@@ -60,7 +62,7 @@ fn main() {
                 println!("\n Well, there isn't much else to do out here...\n");
                 flush();
                 sleep(dur(2500));
-                print!(" *You sit and stare out the window of your cockpit at the stars*");
+                print!(" *You sit and stare out the window of your cockpit at the stars for a while*");
                 flush();
                 sleep(dur(3000));
                 for _ in 0..3 {
