@@ -29,16 +29,18 @@ fn main() {
                     let amount = rand::thread_rng().gen_range(42..=69);
                     sleep(dur(amount));
                 };
+                sleep(dur(1500));
                 println!("Done.");
+                sleep(dur(1000));
                 println!("");
 
                 let current_star: Star = create_random_star();
 
-                println!(" Your Star: {:#?}", current_star);
+                // println!(" Your Star: {:#?}", current_star);
                 println!(" You've been here for quite some time already...");
                 println!(" Your current location is the system {}.\n It is a remote {} located on the far side of the galaxy.", current_star.name, current_star.class_name());
                 flush();
-                sleep(dur(7000));
+                sleep(dur(17000));
                 break;
             } else {
                 sleep(dur(1000));

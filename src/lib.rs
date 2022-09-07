@@ -1,11 +1,13 @@
 use std::io;
 use std::io::Write;
+use clearscreen;
 use std::time::{self, Duration};
 use stellar_bodies::stars::Star;
 
 pub mod stellar_bodies;
 
 pub fn create_random_star() -> Star<'static> {
+    // TODO: source random names and subtypes
     Star::new("Lorem Ipsum", "surprise me", None)
 }
 
@@ -15,9 +17,7 @@ pub fn flush() {
 }
 
 pub fn cls() {
-    for _ in 0..420 {
-        println!("");
-    };
+    clearscreen::clear().unwrap();
 }
 
 pub fn dur(amount: u32) -> Duration {
