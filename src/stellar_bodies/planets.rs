@@ -1378,6 +1378,83 @@ impl<'a> PlanetType<'a> {
                     rotational_period,
                 });
             },
+            "GGWABL" => {
+                let ringed: bool = decide_ringed();
+
+                let type_name: &str;
+                if ringed {
+                    type_name = "Gas Giant With Ammonia-Based Life (Ringed)";
+                }else {
+                    type_name = "Gas Giant With Ammonia-Based Life";
+                };
+
+                let description: &str;
+                if ringed {
+                    description = "CHANGE ME (WITH RINGS)";
+                }else {
+                    description = "CHANGE ME";
+                };
+
+                let rarity: &str = "Very Rare";
+
+                const MIN_DIST: f64 = 7.19408;
+                const MAX_DIST: f64 = 4_217_110;
+                let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
+
+                const MIN_TEMP: i32 = 100;
+                const MAX_TEMP: i32 = 150;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_PRESSURE: f64 = 4.20;
+                const MAX_PRESSURE: f64 = 69_696.9;
+                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+
+                const MIN_RADIUS: f64 = 9_089.773;
+                const MAX_RADIUS: f64 = 77_785.448;
+                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_MASSES: f64 = 1.791545;
+                const MAX_MASSES: f64 = 909.972778;
+                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+
+                const MIN_GRAVITY: f64 = 0.245295452982;
+                const MAX_GRAVITY: f64 = 18.147572568807;
+                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+
+                const MIN_ORBITAL: f64 = 0.015803241023;
+                const MAX_ORBITAL: f64 = 3_331_479.58196979;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.15729662816;
+                const MAX_ROTATIONAL: f64 = 316_824.865185185;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = rotational_range * 86400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+                let landable: bool = is_landable(surface_pressure, surface_temp);
+                let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
+
+                return Self::GGWABL(PlanetTypeProperties {
+                    ringed,
+                    type_name,
+                    description,
+                    rarity,
+                    landable,
+                    explorable,
+                    dist_from_arrival,
+                    low_temp: MIN_TEMP,
+                    high_temp: MAX_TEMP,
+                    surface_temp,
+                    surface_pressure,
+                    radius,
+                    earth_masses,
+                    gravity,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
             _ => {
 
                 /* Template for efficiency purposes */
