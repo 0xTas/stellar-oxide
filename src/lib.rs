@@ -23,3 +23,14 @@ pub fn cls() {
 pub fn dur(amount: u32) -> Duration {
     time::Duration::from_millis(amount.into())
 }
+
+pub fn decide_ringed() -> bool {
+    let chance = rng().gen_range(0..=1337);
+    if chance == 1337 || chance == 420 || chance == 69 {
+        return true;
+    }else if chance < 7 {
+        return true;
+    }else {
+        return false;
+    };
+}
