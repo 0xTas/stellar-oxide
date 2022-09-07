@@ -8,6 +8,25 @@ use rand::{
 
 
 #[derive(Debug)]
+struct Stats<'a> {
+    ringed: bool,
+    type_name: &'a str,
+    description: &'a str,
+    rarity: &'a str,
+    landable: bool,
+    explorable: bool,
+    dist_from_arrival: f64,
+    surface_temp: i32,
+    surface_pressure: f64,
+    radius: f64,
+    earth_masses: f64,
+    gravity: f64,
+    orbital_period: f64,
+    rotational_period: f64,
+}
+
+
+#[derive(Debug)]
 pub struct PlanetTypeProperties<'a> {
     pub ringed: bool,
     pub type_name: &'a str,
@@ -1553,6 +1572,38 @@ impl<'a> PlanetType<'a> {
         }
     }
 
+    fn get_stats(&self) -> Stats {
+
+        // TODO: Potentially write a macro for getting values from the enum variants instead
+        match self {
+            PlanetType::AW(i) | PlanetType::WW(i) | PlanetType::WG(i)
+            | PlanetType::RKB(i) | PlanetType::ICB(i) | PlanetType::ELW(i)
+            | PlanetType::HMC(i) | PlanetType::RIW(i) | PlanetType::MRB(i)
+            | PlanetType::HGG(i) | PlanetType::GGGG(i) | PlanetType::CIGG(i)
+            | PlanetType::CIIGG(i) | PlanetType::CIIIGG(i) | PlanetType::CIVGG(i)
+            | PlanetType::CVGG(i) | PlanetType::HRGG(i) | PlanetType::GGWABL(i)
+            | PlanetType::GGWWBL(i) => 
+            {
+                return Stats{
+                    ringed: i.ringed,
+                    type_name: i.type_name,
+                    description: i.description,
+                    rarity: i.rarity,
+                    landable: i.landable,
+                    explorable: i.explorable,
+                    dist_from_arrival: i.dist_from_arrival,
+                    surface_temp: i.surface_temp,
+                    surface_pressure: i.surface_pressure,
+                    radius: i.radius,
+                    earth_masses: i.earth_masses,
+                    gravity: i.gravity,
+                    orbital_period: i.orbital_period,
+                    rotational_period: i.rotational_period,
+                };
+            },
+            _ => panic!("Not a valid PlanetType!"),
+        };
+    }
 
 }
 
