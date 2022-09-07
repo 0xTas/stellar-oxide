@@ -49,10 +49,10 @@ fn main() {
                 sleep(dur(17000));
                 break;
             } else {
-                sleep(dur(1000));
+                sleep(dur(700));
                 println!("\n Well, there isn't much else to do out here...\n");
                 flush();
-                sleep(dur(2000));
+                sleep(dur(2500));
                 print!(" *You sit and stare out the window of your cockpit at the stars*");
                 flush();
                 sleep(dur(3000));
@@ -63,9 +63,10 @@ fn main() {
                 };
                 println!("");
                 flush();
+                sleep(dur(2420));
                 println!("\n Goodbye!\n");
                 flush();
-                sleep(dur(1000));
+                sleep(dur(2000));
                 break;
             }
         } 
