@@ -1,5 +1,5 @@
 use std::time::Duration;
-use crate::decide_ringed;
+use crate::{decide_ringed, is_landable, is_explorable};
 use rand::{
     distributions::{Distribution, Standard},
     Rng,
@@ -13,6 +13,8 @@ pub struct PlanetTypeProperties<'a> {
     pub type_name: &'a str,
     pub description: &'a str,
     pub rarity: &'a str,
+    pub landable: bool,
+    pub explorable: bool,
     pub dist_from_arrival: f64, // Light-Seconds
     pub low_temp: i32,
     pub high_temp: i32,
@@ -83,7 +85,7 @@ impl<'a> PlanetType<'a> {
                 };
 
                 let rarity: &str = "Very Rare";
-
+                
                 const MIN_DIST: f64 = 7.0;
                 const MAX_DIST: f64 = 81_7190.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
@@ -120,12 +122,16 @@ impl<'a> PlanetType<'a> {
                 let rotational_secs: f64 = rotational_range * 86_400.0;
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
+                let landable: bool = is_landable(surface_pressure, surface_temp);
+                let explorable: bool = is_explorable(surface_pressure, surface_temp);
 
                 return Self::AW(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
                     rarity,
+                    landable,
+                    explorable,
                     dist_from_arrival,
                     low_temp: MIN_TEMP,
                     high_temp: MAX_TEMP,
@@ -193,12 +199,16 @@ impl<'a> PlanetType<'a> {
                 let rotational_secs: f64 = rotational_range * 86_400.0;
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
+                let landable: bool = is_landable(surface_pressure, surface_temp);
+                let explorable: bool = is_explorable(surface_pressure, surface_temp);
 
                 return Self::WW(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
                     rarity,
+                    landable,
+                    explorable,
                     dist_from_arrival,
                     low_temp: MIN_TEMP,
                     high_temp: MAX_TEMP,
@@ -266,12 +276,16 @@ impl<'a> PlanetType<'a> {
                 let rotational_secs: f64 = rotational_range * 86400.0;
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
+                let landable: bool = is_landable(surface_pressure, surface_temp);
+                let explorable: bool = is_explorable(surface_pressure, surface_temp);
 
                 return Self::WG(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
                     rarity,
+                    landable,
+                    explorable,
                     dist_from_arrival,
                     low_temp: MIN_TEMP,
                     high_temp: MAX_TEMP,
@@ -339,12 +353,16 @@ impl<'a> PlanetType<'a> {
                 let rotational_secs: f64 = rotational_range * 86400.0;
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
+                let landable: bool = is_landable(surface_pressure, surface_temp);
+                let explorable: bool = is_explorable(surface_pressure, surface_temp);
 
                 return Self::RKB(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
                     rarity,
+                    landable,
+                    explorable,
                     dist_from_arrival,
                     low_temp: MIN_TEMP,
                     high_temp: MAX_TEMP,
@@ -412,12 +430,16 @@ impl<'a> PlanetType<'a> {
                 let rotational_secs: f64 = rotational_range * 86400.0;
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
+                let landable: bool = is_landable(surface_pressure, surface_temp);
+                let explorable: bool = is_explorable(surface_pressure, surface_temp);
 
                 return Self::CHANGEME(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
                     rarity,
+                    landable,
+                    explorable,
                     dist_from_arrival,
                     low_temp: MIN_TEMP,
                     high_temp: MAX_TEMP,
@@ -485,12 +507,16 @@ impl<'a> PlanetType<'a> {
                 let rotational_secs: f64 = rotational_range * 86400.0;
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
+                let landable: bool = is_landable(surface_pressure, surface_temp);
+                let explorable: bool = is_explorable(surface_pressure, surface_temp);
 
                 return Self::ELW(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
                     rarity,
+                    landable,
+                    explorable,
                     dist_from_arrival,
                     low_temp: MIN_TEMP,
                     high_temp: MAX_TEMP,
@@ -558,12 +584,16 @@ impl<'a> PlanetType<'a> {
                 let rotational_secs: f64 = rotational_range * 86400.0;
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
+                let landable: bool = is_landable(surface_pressure, surface_temp);
+                let explorable: bool = is_explorable(surface_pressure, surface_temp);
 
                 return Self::HMC(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
                     rarity,
+                    landable,
+                    explorable,
                     dist_from_arrival,
                     low_temp: MIN_TEMP,
                     high_temp: MAX_TEMP,
@@ -575,7 +605,84 @@ impl<'a> PlanetType<'a> {
                     orbital_period,
                     rotational_period,
                 });
-            }
+            },
+            "RIW" => {
+                let ringed: bool = decide_ringed();
+
+                let type_name: &str;
+                if ringed {
+                    type_name = "Rocky Ice World (Ringed)";
+                }else {
+                    type_name = "Rocky Ice World";
+                };
+
+                let description: &str;
+                if ringed {
+                    description = "CHANGE ME (WITH RINGS)";
+                }else {
+                    description = "CHANGE ME";
+                };
+
+                let rarity: &str = "Uncommon";
+
+                const MIN_DIST: f64 = 5.3542;
+                const MAX_DIST: f64 = 5_339_010.0;
+                let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
+
+                const MIN_TEMP: i32 = 20.0;
+                const MAX_TEMP: i32 = 15_742;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_PRESSURE: f64 = 0.0;
+                const MAX_PRESSURE: f64 = 253_668_685.603375;
+                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+
+                const MIN_RADIUS: f64 = 276.0;
+                const MAX_RADIUS: f64 = 28_515.804;
+                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_MASSES: f64 = 0.000107;
+                const MAX_MASSES: f64 = 298.62381;
+                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+
+                const MIN_GRAVITY: f64 = 0.001378452377;
+                const MAX_GRAVITY: f64 = 17.259812728912;
+                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+
+                const MIN_ORBITAL: f64 = 0.167619572396;
+                const MAX_ORBITAL: f64 = 58_634_326.6897731;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.147149262604;
+                const MAX_ROTATIONAL: f64 = 47_808.7140740741;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = rotational_range * 86400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+                let landable: bool = is_landable(surface_pressure, surface_temp);
+                let explorable: bool = is_explorable(surface_pressure, surface_temp);
+
+                return Self::CHANGEME(PlanetTypeProperties {
+                    ringed,
+                    type_name,
+                    description,
+                    rarity,
+                    landable,
+                    explorable,
+                    dist_from_arrival,
+                    low_temp: MIN_TEMP,
+                    high_temp: MAX_TEMP,
+                    surface_temp,
+                    surface_pressure,
+                    radius,
+                    earth_masses,
+                    gravity,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
             _ => {
 
                 /* Template for efficiency purposes */
@@ -634,12 +741,16 @@ impl<'a> PlanetType<'a> {
                 // let rotational_secs: f64 = rotational_range * 86400.0;
                 // let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
+                // let landable: bool = is_landable(surface_pressure, surface_temp);
+                // let explorable: bool = is_explorable(surface_pressure, surface_temp);
 
                 // return Self::CHANGEME(PlanetTypeProperties {
                 //     ringed,
                 //     type_name,
                 //     description,
                 //     rarity,
+                //     landable,
+                //     explorable,
                 //     dist_from_arrival,
                 //     low_temp: MIN_TEMP,
                 //     high_temp: MAX_TEMP,
