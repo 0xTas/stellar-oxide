@@ -12,7 +12,8 @@ pub struct PlanetTypeProperties<'a> {
     pub ringed: bool,
     pub type_name: &'a str,
     pub description: &'a str,
-    pub dist_from_arrival: u32, // Light-Seconds
+    pub rarity: &'a str,
+    pub dist_from_arrival: f64, // Light-Seconds
     pub low_temp: i32,
     pub high_temp: i32,
     pub surface_temp: i32, // Kelvin
@@ -73,14 +74,16 @@ impl<'a> PlanetType<'a> {
 
                 let description: &str;
                 if ringed {
-                    description = "TODO";
+                    description = "Terrestrial ammonia world";
                 }else {
                     description = "TODO";
                 };
 
-                const MIN_DIST: u32 = 7;
-                const MAX_DIST: u32 = 81_7190;
-                let dist_from_arrival: u32 = rng().gen_range(MIN_DIST..=MAX_DIST);
+                let rarity: &str = "Very Rare";
+
+                const MIN_DIST: f64 = 7.0;
+                const MAX_DIST: f64 = 81_7190.0;
+                let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
                 const MIN_TEMP: i32 = 27;
                 const MAX_TEMP: i32 = 409;
@@ -119,6 +122,7 @@ impl<'a> PlanetType<'a> {
                     ringed,
                     type_name,
                     description,
+                    rarity,
                     dist_from_arrival,
                     low_temp: MIN_TEMP,
                     high_temp: MAX_TEMP,
@@ -148,9 +152,11 @@ impl<'a> PlanetType<'a> {
                     description = "TODO";
                 };
 
-                const MIN_DIST: u32 = 3;
-                const MAX_DIST: u32 = 4_217_470;
-                let dist_from_arrival: u32 = rng().gen_range(MIN_DIST..=MAX_DIST);
+                let rarity: &str = "Rare";
+
+                const MIN_DIST: f64 = 3.0;
+                const MAX_DIST: f64 = 4_217_470.0;
+                let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
                 const MIN_TEMP: i32 = 150;
                 const MAX_TEMP: i32 = 902;
@@ -189,6 +195,7 @@ impl<'a> PlanetType<'a> {
                     ringed,
                     type_name,
                     description,
+                    rarity,
                     dist_from_arrival,
                     low_temp: MIN_TEMP,
                     high_temp: MAX_TEMP,
@@ -218,9 +225,11 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                const MIN_DIST: u32 = 21;
-                const MAX_DIST: u32 = 690_129;
-                let dist_from_arrival: u32 = rng().gen_range(MIN_DIST..=MAX_DIST);
+                let rarity: &str = "Very Rare";
+
+                const MIN_DIST: f64 = 21.0;
+                const MAX_DIST: f64 = 690_129.0;
+                let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
                 const MIN_TEMP: i32 = 136;
                 const MAX_TEMP: i32 = 2_715;
@@ -255,10 +264,11 @@ impl<'a> PlanetType<'a> {
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
 
-                return Self::CHANGEME(PlanetTypeProperties {
+                return Self::WG(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
+                    rarity,
                     dist_from_arrival,
                     low_temp: MIN_TEMP,
                     high_temp: MAX_TEMP,
@@ -271,6 +281,152 @@ impl<'a> PlanetType<'a> {
                     rotational_period,
                 });
             },
+            "RKB" => {
+                let ringed: bool = decide_ringed();
+
+                let type_name: &str;
+                if ringed {
+                    type_name = "Ringed Rocky Body";
+                }else {
+                    type_name = "Rocky Body";
+                };
+
+                let description: &str;
+                if ringed {
+                    description = "CHANGE ME (WITH RINGS)";
+                }else {
+                    description = "CHANGE ME";
+                };
+
+                let rarity: &str = "Very Common";
+
+                const MIN_DIST: f64 = 3.0;
+                const MAX_DIST: f64 = 7_492_300.0;
+                let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
+
+                const MIN_TEMP: i32 = 20;
+                const MAX_TEMP: i32 = 51_171;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_PRESSURE: f64 = 0.0;
+                const MAX_PRESSURE: f64 = 2_516_369_920.0;
+                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+
+                const MIN_RADIUS: f64 = 181.887875;
+                const MAX_RADIUS: f64 = 21_765.112;
+                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_MASSES: f64 = 0.0001;
+                const MAX_MASSES: f64 = 527.839539;
+                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+
+                const MIN_GRAVITY: f64 = 0.007895669291;
+                const MAX_GRAVITY: f64 = 50.039830862644;
+                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+
+                const MIN_ORBITAL: f64 = 0.001000000046;
+                const MAX_ORBITAL: f64 = 12_163.6164409143;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.100663452148;
+                const MAX_ROTATIONAL: f64 = 166_276.93037037;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = rotational_range * 86400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                return Self::RKB(PlanetTypeProperties {
+                    ringed,
+                    type_name,
+                    description,
+                    rarity,
+                    dist_from_arrival,
+                    low_temp: MIN_TEMP,
+                    high_temp: MAX_TEMP,
+                    surface_temp,
+                    surface_pressure,
+                    radius,
+                    earth_masses,
+                    gravity,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "ICB" => {
+                let ringed: bool = decide_ringed();
+
+                let type_name: &str;
+                if ringed {
+                    type_name = "Ringed Icy Body";
+                }else {
+                    type_name = "Icy Body";
+                };
+
+                let description: &str;
+                if ringed {
+                    description = "CHANGE ME (WITH RINGS)";
+                }else {
+                    description = "CHANGE ME";
+                };
+
+                let rarity: &str = "Very Common";
+
+                const MIN_DIST: f64 = 1.37026;
+                const MAX_DIST: f64 = 15_653_000.0;
+                let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
+
+                const MIN_TEMP: i32 = 1;
+                const MAX_TEMP: i32 = 4_020;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_PRESSURE: f64 = 0.0;
+                const MAX_PRESSURE: f64 = 204_413_011.941219;
+                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+
+                const MIN_RADIUS: f64 = 160.0;
+                const MAX_RADIUS: f64 = 31_232.91;
+                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_MASSES: f64 = 0.0001;
+                const MAX_MASSES: f64 = 2_214.019287;
+                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+
+                const MIN_GRAVITY: f64 = 0.004758505708;
+                const MAX_GRAVITY: f64 = 236.648152852392;
+                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+
+                const MIN_ORBITAL: f64 = 0.000104166667;
+                const MAX_ORBITAL: f64 = 1_257_206_278.81862;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.081735393383;
+                const MAX_ROTATIONAL: f64 = 2_479_320.4190602;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = rotational_range * 86400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                return Self::CHANGEME(PlanetTypeProperties {
+                    ringed,
+                    type_name,
+                    description,
+                    rarity,
+                    dist_from_arrival,
+                    low_temp: MIN_TEMP,
+                    high_temp: MAX_TEMP,
+                    surface_temp,
+                    surface_pressure,
+                    radius,
+                    earth_masses,
+                    gravity,
+                    orbital_period,
+                    rotational_period,
+                });
+            }
             _ => {
 
                 /* Template for efficiency purposes */
@@ -290,6 +446,8 @@ impl<'a> PlanetType<'a> {
                 // }else {
                 //     description = "CHANGE ME";
                 // };
+
+                // let rarity: &str = "CHANGE ME";
 
                 // const MIN_DIST: u32 = 
                 // const MAX_DIST: u32 = 
@@ -332,6 +490,7 @@ impl<'a> PlanetType<'a> {
                 //     ringed,
                 //     type_name,
                 //     description,
+                //     rarity,
                 //     dist_from_arrival,
                 //     low_temp: MIN_TEMP,
                 //     high_temp: MAX_TEMP,
