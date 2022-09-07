@@ -483,7 +483,7 @@ impl<'a> PlanetType<'a> {
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
 
-                return Self::CHANGEME(PlanetTypeProperties {
+                return Self::ELW(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
