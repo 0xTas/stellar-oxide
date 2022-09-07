@@ -8,7 +8,7 @@ use rand::{
 
 
 #[derive(Debug)]
-struct Stats<'a> {
+pub struct Stats<'a> {
     pub ringed: bool,
     pub type_name: &'a str,
     pub description: &'a str,
@@ -1620,6 +1620,14 @@ impl<'a> Planet<'a> {
     pub fn new(name: &'a str, ptype: &'a str) -> Self {
         match ptype {
             _ => return Planet{ name, ptype: PlanetType::new(ptype)},
+        };
+    }
+
+    pub fn stats(&self) -> Stats {
+        if let x = &self.ptype {
+            return x.get_stats();
+        }else {
+            panic!("Invalid Planet Type!");
         };
     }
 }

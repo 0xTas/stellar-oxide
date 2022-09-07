@@ -1,5 +1,5 @@
 use std::io;
-use std::io::Write;
+use std::io::{Write, Read};
 use clearscreen;
 use rand::Rng;
 use rand::thread_rng as rng;
@@ -29,6 +29,16 @@ pub fn cls() {
 
 pub fn dur(amount: u32) -> Duration {
     time::Duration::from_millis(amount.into())
+}
+
+pub fn input() -> String {
+    let mut user_input = String::new();
+
+    io::stdin()
+        .read_line(&mut user_input)
+        .expect("Failed to read from Stdin!");
+
+    user_input
 }
 
 pub fn decide_ringed() -> bool {

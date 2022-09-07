@@ -1,6 +1,6 @@
 use std::{io, thread::sleep};
 use rand::Rng;
-use oasis::{cls, dur, flush, create_random_star, create_random_planet};
+use oasis::{cls, dur, flush, input, create_random_star, create_random_planet};
 use oasis::stellar_bodies::stars::Star;
 use oasis::stellar_bodies::planets::Planet;
 
@@ -19,12 +19,8 @@ fn main() {
         println!("\n Another day out here on the edge of the Galaxy..\n");
         print!(" Would you like to boot into StellarOS? [Y/n] #> ");
 
-        let mut answer = String::new();
-
         flush();
-        io::stdin()
-            .read_line(&mut answer)
-            .expect("Stdin-read Failed!");
+        let mut answer: String = input();
 
         for chr in answer.chars() {
             let chr = chr.to_lowercase().to_string();
@@ -52,12 +48,12 @@ fn main() {
                 
                 let random_planet: Planet = create_random_planet();
 
-                println!("There is one interesting body in this system, you stayed around for a few days to examine it further.");
+                println!(" There is one interesting body in this system, you stayed around for a few days to examine it further.");
                 flush();
                 sleep(dur(420));
-                println!("These are the details you discovered about the planet, dubbed: {}.\n{:#?}", random_planet.name, random_planet);
+                println!(" These are the details you discovered about the {} planet known as {}:\n {:#?}", random_planet.stats().type_name, random_planet.name, random_planet);
                 flush();
-                sleep(dur(20000));
+                sleep(dur(60000));
                 break;
             } else {
                 sleep(dur(700));
