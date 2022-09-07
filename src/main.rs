@@ -1,6 +1,8 @@
 use std::{io, thread::sleep};
 use rand::Rng;
-use oasis::{cls, dur, flush, create_random_star, stellar_bodies::stars::Star};
+use oasis::{cls, dur, flush, create_random_star, create_random_planet};
+use oasis::stellar_bodies::stars::Star;
+use oasis::stellar_bodies::planets::Planet;
 
 
 /* Current goal is to generate random star systems
@@ -46,7 +48,16 @@ fn main() {
                 println!(" You've been here for quite some time already...");
                 println!(" Your current location is the system {}.\n It is a remote {} located on the far side of the galaxy.", current_star.name, current_star.class_name());
                 flush();
-                sleep(dur(17000));
+                sleep(dur(7000));
+                
+                let random_planet: Planet = create_random_planet();
+
+                println!("There is one interesting body in this system, you stayed around for a few days to examine it further.");
+                flush();
+                sleep(dur(420));
+                println!("These are the details you discovered about the planet, dubbed: {}.\n{:#?}", random_planet.name, random_planet);
+                flush();
+                sleep(dur(20000));
                 break;
             } else {
                 sleep(dur(700));

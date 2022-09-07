@@ -9,20 +9,20 @@ use rand::{
 
 #[derive(Debug)]
 struct Stats<'a> {
-    ringed: bool,
-    type_name: &'a str,
-    description: &'a str,
-    rarity: &'a str,
-    landable: bool,
-    explorable: bool,
-    dist_from_arrival: f64,
-    surface_temp: i32,
-    surface_pressure: f64,
-    radius: f64,
-    earth_masses: f64,
-    gravity: f64,
-    orbital_period: f64,
-    rotational_period: f64,
+    pub ringed: bool,
+    pub type_name: &'a str,
+    pub description: &'a str,
+    pub rarity: &'a str,
+    pub landable: bool,
+    pub explorable: bool,
+    pub dist_from_arrival: f64,
+    pub surface_temp: i32,
+    pub surface_pressure: f64,
+    pub radius: f64,
+    pub earth_masses: f64,
+    pub gravity: f64,
+    pub orbital_period: Duration,
+    pub rotational_period: Duration,
 }
 
 
@@ -94,6 +94,7 @@ impl<'a> Distribution<PlanetType<'a>> for Standard {
             16 => PlanetType::new("HRGG"),
             17 => PlanetType::new("GGWABL"),
             18 => PlanetType::new("GGWWBL"),
+            _ => panic!("Invalid PlanetType!"),
         }
     }
 }
@@ -668,7 +669,7 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 5_339_010.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 20.0;
+                const MIN_TEMP: i32 = 20;
                 const MAX_TEMP: i32 = 15_742;
                 let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
@@ -1435,7 +1436,7 @@ impl<'a> PlanetType<'a> {
                 let rarity: &str = "Very Rare";
 
                 const MIN_DIST: f64 = 7.19408;
-                const MAX_DIST: f64 = 4_217_110;
+                const MAX_DIST: f64 = 4_217_110.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
                 const MIN_TEMP: i32 = 100;
@@ -1512,7 +1513,7 @@ impl<'a> PlanetType<'a> {
                 let rarity: &str = "Rare";
 
                 const MIN_DIST: f64 = 5.81925;
-                const MAX_DIST: f64 = 4_214_690;
+                const MAX_DIST: f64 = 4_214_690.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
                 const MIN_TEMP: i32 = 150;
@@ -1569,6 +1570,7 @@ impl<'a> PlanetType<'a> {
                     rotational_period,
                 });
             },
+            _ => rand::random(),
         }
     }
 
@@ -1610,14 +1612,14 @@ impl<'a> PlanetType<'a> {
 
 #[derive(Debug)]
 pub struct Planet<'a> {
-    name: &'a str,
-    ptype: PlanetType,
+    pub name: &'a str,
+    pub ptype: PlanetType<'a>,
 }
 
 impl<'a> Planet<'a> {
-    pub fn new(name: &str, ptype: &str) -> Self {
+    pub fn new(name: &'a str, ptype: &'a str) -> Self {
         match ptype {
-            _ => return Planet::new(name, ptype),
+            _ => return Planet{ name, ptype: PlanetType::new(ptype)},
         };
     }
 }

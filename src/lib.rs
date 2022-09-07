@@ -5,12 +5,17 @@ use rand::Rng;
 use rand::thread_rng as rng;
 use std::time::{self, Duration};
 use stellar_bodies::stars::Star;
+use stellar_bodies::planets::Planet;
 
 pub mod stellar_bodies;
 
 pub fn create_random_star() -> Star<'static> {
     // TODO: source random names and subtypes
     Star::new("Lorem Ipsum", "surprise me", None)
+}
+
+pub fn create_random_planet() -> Planet<'static> {
+    Planet::new("Lorem Ipsum 1", "random")
 }
 
 /* Utility Functions */
