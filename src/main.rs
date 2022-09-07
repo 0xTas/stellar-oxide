@@ -3,6 +3,12 @@ use rand::Rng;
 use oasis::{cls, dur, flush, create_random_star, stellar_bodies::stars::Star};
 
 
+/* Current goal is to generate random star systems
+    and display various info about them in a loop.
+    
+    Future goal is to use that procedural API
+    as the foundation for the game's environment.*/
+
 
 fn main() {
     loop {
