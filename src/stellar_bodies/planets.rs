@@ -40,7 +40,7 @@ pub enum PlanetType<'a> {
     RIW(PlanetTypeProperties<'a>),
     MRB(PlanetTypeProperties<'a>),
     HGG(PlanetTypeProperties<'a>),
-    GGG(PlanetTypeProperties<'a>),
+    GGGG(PlanetTypeProperties<'a>),
     CIGG(PlanetTypeProperties<'a>),
     CIIGG(PlanetTypeProperties<'a>),
     CIIIGG(PlanetTypeProperties<'a>),
@@ -821,6 +821,83 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::HGG(PlanetTypeProperties {
+                    ringed,
+                    type_name,
+                    description,
+                    rarity,
+                    landable,
+                    explorable,
+                    dist_from_arrival,
+                    low_temp: MIN_TEMP,
+                    high_temp: MAX_TEMP,
+                    surface_temp,
+                    surface_pressure,
+                    radius,
+                    earth_masses,
+                    gravity,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "GGGG" => {
+                let ringed: bool = decide_ringed();
+
+                let type_name: &str;
+                if ringed {
+                    type_name = "Glowing Green Gas Giant (Ringed)";
+                }else {
+                    type_name = "Glowing Green Gas Giant";
+                };
+
+                let description: &str;
+                if ringed {
+                    description = "CHANGE ME (WITH RINGS)";
+                }else {
+                    description = "CHANGE ME";
+                };
+
+                let rarity: &str = "Extremely Rare";
+
+                const MIN_DIST: f64 = 7.77777;
+                const MAX_DIST: f64 = 4_200_069.0;
+                let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
+
+                const MIN_TEMP: i32 = 100;
+                const MAX_TEMP: i32 = 150;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_PRESSURE: f64 = 4.20696969;
+                const MAX_PRESSURE: f64 = 420.696969;
+                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+
+                const MIN_RADIUS: f64 = 9_010.666;
+                const MAX_RADIUS: f64 = 77_777.420;
+                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_MASSES: f64 = 1.77777777;
+                const MAX_MASSES: f64 = 910.69696969;
+                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+
+                const MIN_GRAVITY: f64 = 0.2420420420;
+                const MAX_GRAVITY: f64 = 20.4;
+                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+
+                const MIN_ORBITAL: f64 = 0.01337;
+                const MAX_ORBITAL: f64 = 3_333_420.696969;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.17777777777777;
+                const MAX_ROTATIONAL: f64 = 317_808.789789789;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = rotational_range * 86400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+                let landable: bool = is_landable(surface_pressure, surface_temp);
+                let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
+
+                return Self::CHANGEME(PlanetTypeProperties {
                     ringed,
                     type_name,
                     description,
