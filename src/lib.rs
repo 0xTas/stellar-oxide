@@ -45,8 +45,8 @@ pub fn is_landable(pressure: f64, temp: i32) -> bool {
     };
 }
 
-pub fn is_explorable(pressure: f64, temp: i32) -> bool {
-    if pressure <= 2.25 && temp <= 370 {
+pub fn is_explorable(pressure: f64, temp: i32, gravity: f64) -> bool {
+    if pressure <= 2.25 && temp <= 370 && gravity <= 4.20 {
         return true;
     }else {
         return false;
