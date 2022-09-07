@@ -11,7 +11,7 @@ pub struct ClassInfo<'a> {
 }
 
 #[derive(Debug)]
-pub struct Stats {
+pub struct Stats<'a> {
     pub class_name: &'a str,
     pub can_fuel_scoop: bool,
     pub can_fsd_boost: bool,
