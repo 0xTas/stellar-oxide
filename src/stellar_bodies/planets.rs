@@ -107,16 +107,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Ammonia World";
-                }else {
-                    type_name = "Ammonia World";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Ammonia World";
                     description = "Terrestrial ammonia world";
                 }else {
+                    type_name = "Ammonia World";
                     description = "TODO";
                 };
 
@@ -182,16 +178,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Water World";
-                }else {
-                    type_name = "Water World";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Water World";
                     description = "TODO";
                 }else {
+                    type_name = "Water World";
                     description = "TODO";
                 };
 
@@ -257,16 +249,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Water Giant";
-                }else {
-                    type_name = "Water Giant";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Water Giant";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Water Giant";
                     description = "CHANGE ME";
                 };
 
@@ -332,16 +320,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Rocky Body";
-                }else {
-                    type_name = "Rocky Body";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Rocky Body";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Rocky Body";
                     description = "CHANGE ME";
                 };
 
@@ -407,17 +391,13 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Icy Body";
-                }else {
-                    type_name = "Icy Body";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Icy Body";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
-                    description = "CHANGE ME";
+                    type_name = "Icy Body";
+                    description = "CHANGE ME (WITH RINGS)";
                 };
 
                 let rarity: &str = "Very Common";
@@ -482,16 +462,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Earth-like World";
-                }else {
-                    type_name = "Earth-like World";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Earth-like World";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Earth-like World";
                     description = "CHANGE ME";
                 };
 
@@ -557,16 +533,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed High Metal Content Planet";
-                }else {
-                    type_name = "High Metal Content Planet";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed High Metal Content Planet";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "High Metal Content Planet";
                     description = "CHANGE ME";
                 };
 
@@ -632,16 +604,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Rocky Ice World (Ringed)";
-                }else {
-                    type_name = "Rocky Ice World";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Rocky Ice World (Ringed)";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Rocky Ice World";
                     description = "CHANGE ME";
                 };
 
@@ -707,16 +675,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Metal-Rich Body (Ringed)";
-                }else {
-                    type_name = "Metal-Rich Body";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Metal-Rich Body (Ringed)";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Metal-Rich Body";
                     description = "CHANGE ME";
                 };
 
@@ -782,17 +746,13 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Helium Gas Giant";
-                }else {
-                    type_name = "Helium Gas Giant";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Helium Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
-                    description = "CHANGE ME";
+                    type_name = "Helium Gas Giant";
+                    description = "CHANGE ME (WITH RINGS)";
                 };
 
                 let rarity: &str = "Very Rare";
@@ -857,16 +817,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Glowing Green Gas Giant (Ringed)";
-                }else {
-                    type_name = "Glowing Green Gas Giant";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Glowing Green Gas Giant (Ringed)";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Glowing Green Gas Giant";
                     description = "CHANGE ME";
                 };
 
@@ -932,16 +888,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Class I Gas Giant";
-                }else {
-                    type_name = "Class I Gas Giant";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Class I Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Class I Gas Giant";
                     description = "CHANGE ME";
                 };
 
@@ -1007,16 +959,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Class II Gas Giant";
-                }else {
-                    type_name = "Class II Gas Giant";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Class II Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Class II Gas Giant";
                     description = "CHANGE ME";
                 };
 
@@ -1082,16 +1030,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Class III Gas Giant";
-                }else {
-                    type_name = "Class III Gas Giant";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Class III Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Class III Gas Giant";
                     description = "CHANGE ME";
                 };
 
@@ -1157,16 +1101,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Class IV Gas Giant";
-                }else {
-                    type_name = "Class IV Gas Giant";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Class IV Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Class IV Gas Giant";
                     description = "CHANGE ME";
                 };
 
@@ -1232,16 +1172,12 @@ impl<'a> PlanetType<'a> {
                                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Class V Gas Giant";
-                }else {
-                    type_name = "Class V Gas Giant";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Class V Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Class V Gas Giant";
                     description = "CHANGE ME";
                 };
 
@@ -1307,16 +1243,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Ringed Helium-Rich Gas Giant";
-                }else {
-                    type_name = "Helium-Rich Gas Giant";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Ringed Helium-Rich Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Helium-Rich Gas Giant";
                     description = "CHANGE ME";
                 };
 
@@ -1382,16 +1314,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Gas Giant With Ammonia-Based Life (Ringed)";
-                }else {
-                    type_name = "Gas Giant With Ammonia-Based Life";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Gas Giant With Ammonia-Based Life (Ringed)";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Gas Giant With Ammonia-Based Life";
                     description = "CHANGE ME";
                 };
 
@@ -1457,16 +1385,12 @@ impl<'a> PlanetType<'a> {
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
-                if ringed {
-                    type_name = "Gas Giant With Water-Based Life (Ringed)";
-                }else {
-                    type_name = "Gas Giant With Water-Based Life";
-                };
-
                 let description: &str;
                 if ringed {
+                    type_name = "Gas Giant With Water-Based Life (Ringed)";
                     description = "CHANGE ME (WITH RINGS)";
                 }else {
+                    type_name = "Gas Giant With Water-Based Life";
                     description = "CHANGE ME";
                 };
 
