@@ -1,5 +1,4 @@
 use std::time::Duration;
-use crate::{is_landable, is_explorable};
 use rand::{
     distributions::{Distribution, Standard},
     Rng,
@@ -1507,4 +1506,22 @@ impl<'a> Planet<'a> {
         let stats = &self.ptype;
         stats.extract_stats()
     }
+}
+
+
+/* Planetary Util Functions */
+fn is_landable(pressure: f64, temp: i32) -> bool {
+    if pressure <= 4.20 && temp <= 666 {
+        return true;
+    }else {
+        return false;
+    };
+}
+
+fn is_explorable(pressure: f64, temp: i32, gravity: f64) -> bool {
+    if pressure <= 2.25 && temp <= 370 && gravity <= 4.20 {
+        return true;
+    }else {
+        return false;
+    };
 }
