@@ -140,8 +140,8 @@ impl<'a> Distribution<StarClass<'a>> for Standard {
 
 impl<'a> StarClass<'a> {
 
-    /// Returns a new instance of the *StarClass* enum, with randomly initialized properties.
-    /// Accepts desired class identifier as a &str, but will return a random *StarClass* if an improper identifier is given.
+    /// Returns a new instance of the *StarClass* enum, with randomly-initialized properties.
+    /// Accepts desired class identifier as a &str, but will return a random *StarClass* if an invalid identifier is given.
     /// 
     /// **Valid Identifiers:**
     /// [O, OG, B, BG, A, AG, F, FG, G, GG, K, KG, M, MG, L, T, Y, AEBE, TTS, C, CJ, CN, MS, S, W, WC, WN, WNC, WO, NS, D, DA, DAB, DAV, DAZ, DB, DBV, DBZ, DC, DCV, DQ, BH]
@@ -2907,7 +2907,7 @@ pub struct Star<'a> {
 
 impl<'a> Star<'a> {
     /// Returns a new instance of the *Star* struct, with randomly-initialized properties.
-    /// Expects a name and class identifier, will return with a random *StarClass* if an improper identifier string is provided.
+    /// Expects a name and class identifier, will return with a random *StarClass* if an invalid identifier string is provided.
     /// 
     /// **Valid Identifiers:**
     /// [O, OG, B, BG, A, AG, F, FG, G, GG, K, KG, M, MG, L, T, Y, AEBE, TTS, C, CJ, CN, MS, S, W, WC, WN, WNC, WO, NS, D, DA, DAB, DAV, DAZ, DB, DBV, DBZ, DC, DCV, DQ, BH]
