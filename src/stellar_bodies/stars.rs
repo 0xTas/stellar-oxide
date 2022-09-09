@@ -93,9 +93,9 @@ impl<'a> Distribution<StarClass<'a>> for Standard {
 impl<'a> StarClass<'a> {
     pub fn new(class: &str) -> Self {
 
+        /* Here is where most property values of different star classes are assigned */
         match class {
             "O" => {
-                let ringed: bool = false;
                 let class_name: &str;
                 let description: &str;
                 let rarity: &str;
@@ -103,6 +103,7 @@ impl<'a> StarClass<'a> {
                 let scoopable: bool = true;
                 let boostable: bool = false;
                 let supergiant: bool = false;
+                let ringed: bool = false;
                 let is_primary: bool = rng().gen_bool(1.0 / 1.42);
                 let is_planet: bool = rng().gen_bool(1.0 / 42_069.1337);
 
@@ -174,14 +175,14 @@ impl<'a> StarClass<'a> {
                 });
             },
             "B" => {
-                let ringed: bool = rng().gen_bool(1.0 / 20.0);
                 let class_name: &str;
                 let description: &str;
                 let rarity: &str;
 
+                let supergiant: bool;
                 let scoopable: bool = true;
                 let boostable: bool = false;
-                let supergiant: bool = rng().gen_bool(1.0 / 42.0);
+                let ringed: bool = rng().gen_bool(1.0 / 20.0);
                 let is_primary: bool = rng().gen_bool(1.0 / 1.7);
                 let is_planet: bool = rng().gen_bool(1.0 / 17.0);
 
@@ -255,7 +256,6 @@ impl<'a> StarClass<'a> {
                 });
             },
             "A" => {
-                let ringed: bool;
                 let class_name: &str;
                 let description: &str;
                 let rarity: &str;
@@ -263,8 +263,9 @@ impl<'a> StarClass<'a> {
                 let supergiant: bool;
                 let scoopable: bool = true;
                 let boostable: bool = false;
+                let ringed: bool = rng().gen_bool(1.0 / 420_069.0);
                 let is_primary: bool = rng().gen_bool(1.0 / 1.4);
-                let is_planet: bool = rng().gen_bool(1.0 / 42_666.0);
+                let is_planet: bool = rng().gen_bool(1.0 / 420_069.0);
 
 
                 const MIN_AGE: u64 = 0;
@@ -335,84 +336,327 @@ impl<'a> StarClass<'a> {
                     rotational_period,
                 });
             },
-            // "F" => {
-            //     let ringed: bool;
-            //     let class_name: &str;
-            //     let description: &str;
-            //     let rarity: &str;
+            "F" => {
+                let class_name: &str;
+                let description: &str;
+                let rarity: &str;
 
-            //     let scoopable: bool;
-            //     let boostable: bool;
-            //     let supergiant: bool;
-            //     let is_primary: bool;
-            //     let is_planet: bool;
-
-
-            //     const MIN_AGE: u64;
-            //     const MAX_AGE: u64;
-            //     let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
-
-            //     const MIN_MASS: f64;
-            //     const MAX_MASS: f64;
-            //     let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
-
-            //     const MIN_RADIUS: f64;
-            //     const MAX_RADIUS: f64;
-            //     let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
-
-            //     const MIN_TEMP: i32;
-            //     const MAX_TEMP: i32;
-            //     let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
-            //     const MIN_ORBITAL: f64;
-            //     const MAX_ORBITAL: f64;
-            //     let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
-            //     let orbital_secs: f64 = orbital_range * 86_400.0;
-            //     let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
-
-            //     const MIN_ROTATIONAL: f64;
-            //     const MAX_ROTATIONAL: f64;
-            //     let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
-            //     let rotational_secs: f64 = orbital_range * 86_400.0;
-            //     let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+                let supergiant: bool;
+                let scoopable: bool = true;
+                let boostable: bool = false;
+                let ringed: bool = rng().gen_bool(1.0 / 52.0);
+                let is_primary: bool = rng().gen_bool(1.0 / 1.14269);
+                let is_planet: bool = rng().gen_bool(1.0 / 69.420);
 
 
-            //     if solar_radius >= 420.0 {
-            //         supergiant = true;
-            //         is_planet = false;
-            //         is_primary = true;
-            //         ringed = false;
-            //     }else {
-            //         supergiant = false;
-            //     };
+                const MIN_AGE: u64 = 0;
+                const MAX_AGE: u64 = 13_038;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
 
-            //     if ringed {
-            //         class_name = "CHANGE ME (Ringed)";
-            //         description = "CHANGE ME (Ringed)";
-            //     }else {
-            //         class_name = "CHANGE ME";
-            //         description = "CHANGE ME";
-            //     };
+                const MIN_MASS: f64 = 0.492188;
+                const MAX_MASS: f64 = 17.0;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64 = 0.499396823391;
+                const MAX_RADIUS: f64 = 214.740608599247;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32 = 3_798;
+                const MAX_TEMP: i32 = 34_130;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64 = 0.086331758854;
+                const MAX_ORBITAL: f64 = 273_578_917.538678;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.198873008519;
+                const MAX_ROTATIONAL: f64 = 414.054418727419;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
 
-            //     return Self::CHANGEME(ClassInfo {
-            //         ringed,
-            //         type_name,
-            //         description,
-            //         rarity,
-            //         scoopable,
-            //         boostable,
-            //         supergiant,
-            //         is_planet,
-            //         is_primary,
-            //         age,
-            //         solar_masses,
-            //         solar_radius,
-            //         surface_temp,
-            //         orbital_period,
-            //         rotational_period,
-            //     });
-            // }
+                if solar_radius >= 50.0 {
+                    supergiant = true;
+                    is_planet = false;
+                    is_primary = true;
+                    ringed = false;
+                    rarity = "Very Rare";
+                }else {
+                    supergiant = false;
+                };
+
+                if ringed {
+                    class_name = "Ringed F Class Star";
+                    description = "CHANGE ME (Ringed)";
+                    rarity = "Very Rare";
+                }else {
+                    class_name = "F Class Star";
+                    description = "CHANGE ME";
+                    rarity = "Common";
+                };
+
+
+                return Self::F(ClassInfo {
+                    ringed,
+                    type_name,
+                    description,
+                    rarity,
+                    scoopable,
+                    boostable,
+                    supergiant,
+                    is_planet,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "G" => {
+                let class_name: &str;
+                let description: &str;
+                let rarity: &str;
+
+                let supergiant: bool;
+                let scoopable: bool = true;
+                let boostable: bool = false;
+                let ringed: bool = rng().gen_bool(1.0 / 142.0);
+                let is_primary: bool = rng().gen_bool(1.0 / 1.0420);
+                let is_planet: bool = rng().gen_bool(1.0 / 100.0);
+
+
+                const MIN_AGE: u64 = 0;
+                const MAX_AGE: u64 = 13_065;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
+
+                const MIN_MASS: f64 = 0.421875;
+                const MAX_MASS: f64 = 6.253906;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64 = 0.509979237958;
+                const MAX_RADIUS: f64 = 142.490128563623;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32 = 3_346;
+                const MAX_TEMP: i32 = 18_407;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64 = 0.086580284965;
+                const MAX_ORBITAL: f64 = 465_068_317.673824;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.460332842512;
+                const MAX_ROTATIONAL: f64 = 540.618148148148;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                if solar_radius >= 42.0 {
+                    supergiant = true;
+                    is_planet = false;
+                    is_primary = true;
+                    ringed = false;
+                    rarity = "Extremely Rare";
+                }else {
+                    supergiant = false;
+                };
+
+                if ringed {
+                    class_name = "Ringed G Class Star";
+                    description = "CHANGE ME (Ringed)";
+                    rarity = "Extremely Rare";
+                }else {
+                    class_name = "G Class Star";
+                    description = "CHANGE ME";
+                    rarity = "Common";
+                };
+
+
+                return Self::G(ClassInfo {
+                    ringed,
+                    type_name,
+                    description,
+                    rarity,
+                    scoopable,
+                    boostable,
+                    supergiant,
+                    is_planet,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "K" => {
+                let class_name: &str;
+                let description: &str;
+                let rarity: &str;
+
+                let supergiant: bool;
+                let scoopable: bool = true;
+                let boostable: bool = false;
+                let ringed: bool = rng().gen_bool(1.0 / 27.0);
+                let is_primary: bool = rng().gen_bool(1.0 / 1.6666667);
+                let is_planet: bool = rng().gen_bool(1.0 / 30.0);
+
+
+                const MIN_AGE: u64 = 0;
+                const MAX_AGE: u64 = 13_062;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
+
+                const MIN_MASS: f64 = 0.449218988419;
+                const MAX_MASS: f64 = 13.097656;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64 = 0.104853824281;
+                const MAX_RADIUS: f64 = 907.527721837034;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32 = 3_255;
+                const MAX_TEMP: i32 = 8_442;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64 = 0.086368436458;
+                const MAX_ORBITAL: f64 = 393_208_219.77324;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.549157895694;
+                const MAX_ROTATIONAL: f64 = 4_491.19099445159;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                if solar_radius >= 58.0 {
+                    supergiant = true;
+                    is_planet = false;
+                    is_primary = true;
+                    ringed = false;
+                    rarity = "Very Rare";
+                }else {
+                    supergiant = false;
+                };
+
+                if ringed {
+                    class_name = "Ringed K Class Star";
+                    description = "CHANGE ME (Ringed)";
+                    rarity = "Rare";
+                }else {
+                    class_name = "K Class Star";
+                    description = "CHANGE ME";
+                    rarity = "Common";
+                };
+
+
+                return Self::K(ClassInfo {
+                    ringed,
+                    type_name,
+                    description,
+                    rarity,
+                    scoopable,
+                    boostable,
+                    supergiant,
+                    is_planet,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "M" => {
+                let class_name: &str;
+                let description: &str;
+                let rarity: &str;
+
+                let supergiant: bool;
+                let scoopable: bool;
+                let boostable: bool;
+                let ringed: bool = rng().gen_bool(1.0 / 17.0);
+                let is_primary: bool = rng().gen_bool(1.0 / 1.97778);
+                let is_planet: bool = rng().gen_bool(1.0 / 20.0);
+
+
+                const MIN_AGE: u64;
+                const MAX_AGE: u64;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
+
+                const MIN_MASS: f64;
+                const MAX_MASS: f64;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64;
+                const MAX_RADIUS: f64;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32;
+                const MAX_TEMP: i32;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64;
+                const MAX_ORBITAL: f64;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64;
+                const MAX_ROTATIONAL: f64;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                if solar_radius >= 420.0 {
+                    supergiant = true;
+                    is_planet = false;
+                    is_primary = true;
+                    ringed = false;
+                }else {
+                    supergiant = false;
+                };
+
+                if ringed {
+                    class_name = "Ringed M Class Star";
+                    description = "CHANGE ME (Ringed)";
+                }else {
+                    class_name = "M Class Star";
+                    description = "CHANGE ME";
+                };
+
+
+                return Self::M(ClassInfo {
+                    ringed,
+                    type_name,
+                    description,
+                    rarity,
+                    scoopable,
+                    boostable,
+                    supergiant,
+                    is_planet,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
             _ => {
 
 
