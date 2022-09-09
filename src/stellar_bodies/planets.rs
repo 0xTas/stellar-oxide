@@ -1097,7 +1097,7 @@ impl<'a> PlanetType<'a> {
                     rotational_period,
                 });
             },
-            "CIVGG" => {
+            "CIVGG" => { // Class IV Gas Giant
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
@@ -1168,7 +1168,7 @@ impl<'a> PlanetType<'a> {
                     rotational_period,
                 });
             },
-            "CVGG" => {
+            "CVGG" => { // Class V Gas Giant
                                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
@@ -1239,7 +1239,7 @@ impl<'a> PlanetType<'a> {
                     rotational_period,
                 });
             },
-            "HRGG" => {
+            "HRGG" => { // Helium-Rich Gas Giant
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
@@ -1310,7 +1310,7 @@ impl<'a> PlanetType<'a> {
                     rotational_period,
                 });
             },
-            "GGWABL" => {
+            "GGWABL" => { // Gas Giant with Ammonia Based Life
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
@@ -1381,7 +1381,7 @@ impl<'a> PlanetType<'a> {
                     rotational_period,
                 });
             },
-            "GGWWBL" => {
+            "GGWWBL" => { // Gas Giant with Water Baed Life
                 let ringed: bool = decide_ringed();
 
                 let type_name: &str;
