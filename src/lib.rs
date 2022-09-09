@@ -3,7 +3,7 @@ use std::io::Write;
 use clearscreen;
 use rand::Rng;
 use rand::thread_rng as rng;
-use std::time::{self, Duration};
+use std::time::Duration;
 use stellar_bodies::stars::Star;
 use stellar_bodies::planets::Planet;
 
@@ -48,6 +48,7 @@ impl Rarity {
     }
 }
 
+
 pub fn create_random_star() -> Star<'static> {
     // TODO: source random names and subtypes
     Star::new("Lorem Ipsum", "surprise me")
@@ -67,7 +68,7 @@ pub fn cls() {
 }
 
 pub fn dur(amount: u32) -> Duration {
-    time::Duration::from_millis(amount.into())
+    Duration::from_millis(amount.into())
 }
 
 pub fn input() -> String {
