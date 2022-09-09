@@ -1,5 +1,5 @@
 use std::time::Duration;
-use crate::{decide_ringed, is_landable, is_explorable};
+use crate::{is_landable, is_explorable};
 use rand::{
     distributions::{Distribution, Standard},
     Rng,
@@ -104,7 +104,7 @@ impl<'a> PlanetType<'a> {
         // TODO: Calculate ring probability based on planet type.
         match planet_type {
             "AW" => { // Ammonia World
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 42.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -175,7 +175,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "WW" => { // Water World
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 42.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -246,7 +246,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "WG" => { // Water Giant
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 15.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -317,7 +317,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "RKB" => { // Rocky Body
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 20.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -388,7 +388,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "ICB" => { // Icy Body
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 20.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -459,7 +459,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "ELW" => { // Earth-like World
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 420.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -530,7 +530,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "HMC" => { // High Metal Content Planet
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 20.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -601,7 +601,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "RIW" => { // Rocky Ice World
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 25.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -672,7 +672,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "MRB" => { // Metal-Rich Body
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 30.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -743,7 +743,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "HGG" => { // Helium Gass Giant
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 7.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -814,7 +814,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "GGGG" => { // Glowing Green Gas Giant
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 5.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -885,7 +885,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "CIGG" => { // Class I Gas Giant
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 3.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -956,7 +956,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "CIIGG" => { // Class II Gas Giant
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 3.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -1027,7 +1027,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "CIIIGG" => { // Class III Gas Giant
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 3.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -1098,7 +1098,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "CIVGG" => { // Class IV Gas Giant
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 3.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -1169,7 +1169,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "CVGG" => { // Class V Gas Giant
-                                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 3.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -1240,7 +1240,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "HRGG" => { // Helium-Rich Gas Giant
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 7.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -1311,7 +1311,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "GGWABL" => { // Gas Giant with Ammonia Based Life
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 5.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -1382,7 +1382,7 @@ impl<'a> PlanetType<'a> {
                 });
             },
             "GGWWBL" => { // Gas Giant with Water Baed Life
-                let ringed: bool = decide_ringed();
+                let ringed: bool = rng().gen_bool(1.0 / 5.0);
 
                 let type_name: &str;
                 let description: &str;
@@ -1458,7 +1458,6 @@ impl<'a> PlanetType<'a> {
 
     fn extract_stats(&self) -> Stats {
 
-        // TODO: Potentially write a macro for getting values from the enum variants instead
         match self {
             PlanetType::AW(i) | PlanetType::WW(i) | PlanetType::WG(i)
             | PlanetType::RKB(i) | PlanetType::ICB(i) | PlanetType::ELW(i)
