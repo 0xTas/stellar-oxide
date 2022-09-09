@@ -18,7 +18,7 @@ fn main() {
         println!("\n Another day out here on the edge of the Galaxy..\n");
         print!(" Would you like to boot into StellarOS? [Y/n] #> ");
 
-        flush();
+        wait(0);
         let answer: String = input();
 
         for chr in answer.chars() {
