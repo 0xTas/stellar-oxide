@@ -845,6 +845,86 @@ impl<'a> StarClass<'a> {
                     rotational_period,
                 });
             },
+            "Y" => {
+                let class_name: &str;
+                let description: &str;
+
+                let scoopable: bool = false;
+                let boostable: bool = false;
+                let supergiant: bool = false;
+                let ringed: bool = rng().gen_bool(1.0 / 2.0);
+                let is_primary: bool = rng().gen_bool(1.0 / 7.0);
+                let is_moon: bool = rng().gen_bool(1.0 / 3.0);
+
+                if is_primary {
+                    is_moon = false;
+                };
+
+
+                const MIN_AGE: u64 = 0;
+                const MAX_AGE: u64 = 13_065;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
+
+                const MIN_MASS: f64 = 0.007799999788;
+                const MAX_MASS: f64 = 6.0;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64 = 0.022277830338;
+                const MAX_RADIUS: f64 = 3.895288853146;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32 = 128;
+                const MAX_TEMP: i32 = 699;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64 = 0.063383751725;
+                const MAX_ORBITAL: f64 = 52_604_529.7306997;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.075849250694;
+                const MAX_ROTATIONAL: f64 = 3_905_486.45233072;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                let rarity: Rarity;
+                if ringed {
+                    class_name = "Ringed Class Y Brown Dwarf";
+                    description = "CHANGE ME (Ringed)";
+                    if is_primary {
+                        rarity = Rarity::new("UC");
+                    }else {
+                        rarity = Rarity::new("C");
+                    };
+                    
+                }else {
+                    class_name = "Class Y Brown Dwarf";
+                    description = "CHANGE ME";
+                    rarity = Rarity::new("C");
+                };
+
+
+                return Self::Y(ClassInfo {
+                    ringed,
+                    type_name,
+                    description,
+                    rarity,
+                    scoopable,
+                    boostable,
+                    supergiant,
+                    is_moon,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
             _ => {
 
 
