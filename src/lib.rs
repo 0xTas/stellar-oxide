@@ -21,7 +21,7 @@ pub enum Rarity {
     Legendary,
 }
 
-impl<'a> Rarity<'a> {
+impl Rarity {
     pub fn new(rarity: &str) -> Self {
         match rarity {
             "VC" => Self::VeryCommon,
