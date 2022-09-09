@@ -12,26 +12,38 @@ pub mod stellar_bodies;
 
 #[derive(Debug)]
 pub enum Rarity<'a> {
-    VeryCommon(&'a str),
-    Common(&'a str),
-    Uncommon(&'a str),
-    Rare(&'a str),
-    VeryRare(&'a str),
-    ExtremelyRare(&'a str),
-    Legendary(&'a str),
+    VeryCommon,
+    Common,
+    Uncommon,
+    Rare,
+    VeryRare,
+    ExtremelyRare,
+    Legendary,
 }
 
 impl<'a> Rarity<'a> {
     pub fn new(rarity: &str) -> Self {
         match rarity {
-            "VC" => Self::VeryCommon("Very Common"),
-            "C" => Self::Common("Common"),
-            "UC" => Self::Uncommon("Uncommon"),
-            "R" => Self::Rare("Rare"),
-            "VR" => Self::VeryRare("Very Rare"),
-            "ER" => Self::ExtremelyRare("Extremely Rare"),
-            "L" => Self::Legendary("Legendary"),
+            "VC" => Self::VeryCommon,
+            "C" => Self::Common,
+            "UC" => Self::Uncommon,
+            "R" => Self::Rare,
+            "VR" => Self::VeryRare,
+            "ER" => Self::ExtremelyRare,
+            "L" => Self::Legendary,
             _ => panic!("Invalid Rarity!"),
+        }
+    }
+
+    pub fn fetch_rarity(&self) -> &str {
+        match self {
+            Rarity::VeryCommon => "Very Common",
+            Rarity::Common => "Common",
+            Rarity::Uncommon => "Uncommon",
+            Rarity::Rare => "Rare",
+            Rarity::VeryRare => "Very Rare",
+            Rarity::ExtremelyRare => "Extremely Rare",
+            Rarity::Legendary => "Legendary",
         }
     }
 }
