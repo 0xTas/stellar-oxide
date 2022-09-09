@@ -139,6 +139,12 @@ impl<'a> Distribution<StarClass<'a>> for Standard {
 }
 
 impl<'a> StarClass<'a> {
+
+    /// Returns a new instance of the *StarClass* enum, with randomly initialized properties.
+    /// Accepts desired class identifier as a &str, but will return a random *StarClass* if an improper identifier is given.
+    /// 
+    /// **Valid Identifiers:**
+    /// [O, OG, B, BG, A, AG, F, FG, G, GG, K, KG, M, MG, L, T, Y, AEBE, TTS, C, CJ, CN, MS, S, W, WC, WN, WNC, WO, NS, D, DA, DAB, DAV, DAZ, DB, DBV, DBZ, DC, DCV, DQ, BH]
     pub fn new(class: &str) -> Self {
 
         /* Here is where most property values of different star classes are assigned */
@@ -2858,6 +2864,7 @@ impl<'a> StarClass<'a> {
         }
     }
 
+    /// Takes the inner values from the *ClassInfo* struct and packages them in the higher-level *Stats* struct.
     fn extract_stats(&self) -> Stats {
         match self {
             Self::O(i) | Self::OG(i) | Self::B(i) | Self::BG(i) | Self::A(i)
@@ -2899,6 +2906,11 @@ pub struct Star<'a> {
 }
 
 impl<'a> Star<'a> {
+    /// Returns a new instance of the *Star* struct, with randomly-initialized properties.
+    /// Expects a name and class identifier, will return with a random *StarClass* if an improper identifier string is provided.
+    /// 
+    /// **Valid Identifiers:**
+    /// [O, OG, B, BG, A, AG, F, FG, G, GG, K, KG, M, MG, L, T, Y, AEBE, TTS, C, CJ, CN, MS, S, W, WC, WN, WNC, WO, NS, D, DA, DAB, DAV, DAZ, DB, DBV, DBZ, DC, DCV, DQ, BH]
     pub fn new(name: &'a str, class: &'a str) -> Self {
         let class = StarClass::new(class);
         Star {
@@ -2907,6 +2919,7 @@ impl<'a> Star<'a> {
         }
     }
 
+    /// Returns the *Stats* struct for the currently-calling *Star* instance.
     pub fn stats(&self) -> Stats {
         let x: &StarClass = &self.class;
         x.extract_stats()
