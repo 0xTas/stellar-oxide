@@ -17,6 +17,7 @@ pub enum Rarity<'a> {
     Uncommon(&'a str),
     Rare(&'a str),
     VeryRare(&'a str),
+    ExtremelyRare(&'a str),
     Legendary(&'a str),
 }
 
@@ -28,6 +29,7 @@ impl<'a> Rarity<'a> {
             "UC" => Self::Uncommon("Uncommon"),
             "R" => Self::Rare("Rare"),
             "VR" => Self::VeryRare("Very Rare"),
+            "ER" => Self::ExtremelyRare("Extremely Rare"),
             "L" => Self::Legendary("Legendary"),
             _ => panic!("Invalid Rarity!"),
         }
