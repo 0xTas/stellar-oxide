@@ -2,6 +2,7 @@ use std::io;
 use std::io::Write;
 use clearscreen;
 use std::time::Duration;
+use std::thread::sleep;
 use stellar_bodies::stars::Star;
 use stellar_bodies::planets::Planet;
 
@@ -61,12 +62,14 @@ pub fn flush() {
     io::stdout().flush().expect("Write to console failed!");
 }
 
-pub fn cls() {
-    clearscreen::clear().unwrap();
+pub fn wait(duration: u32) {
+    flush();
+    let duration: Duration = Duration::from_millis(duration.into());
+    sleep(duration);
 }
 
-pub fn dur(amount: u32) -> Duration {
-    Duration::from_millis(amount.into())
+pub fn cls() {
+    clearscreen::clear().unwrap();
 }
 
 pub fn input() -> String {
