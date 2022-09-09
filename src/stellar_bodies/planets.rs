@@ -1,4 +1,5 @@
 use std::time::Duration;
+use crate::Rarity;
 use rand::{
     distributions::{Distribution, Standard},
     Rng,
@@ -11,7 +12,7 @@ pub struct PlanetTypeProperties<'a> {
     pub ringed: bool,
     pub type_name: &'a str,
     pub description: &'a str,
-    pub rarity: &'a str,
+    pub rarity: Rarity,
     pub landable: bool,
     pub explorable: bool,
     pub dist_from_arrival: f64, // Light-Seconds
@@ -115,7 +116,7 @@ impl<'a> PlanetType<'a> {
                     description = "TODO";
                 };
 
-                let rarity: &str = "Very Rare";
+                let rarity: Rarity = Rarity::VeryRare;
                 
                 const MIN_DIST: f64 = 7.0;
                 const MAX_DIST: f64 = 81_7190.0;
@@ -186,7 +187,7 @@ impl<'a> PlanetType<'a> {
                     description = "TODO";
                 };
 
-                let rarity: &str = "Rare";
+                let rarity: Rarity = Rarity::Rare;
 
                 const MIN_DIST: f64 = 3.0;
                 const MAX_DIST: f64 = 4_217_470.0;
@@ -257,7 +258,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Very Rare";
+                let rarity: Rarity = Rarity::VeryRare;
 
                 const MIN_DIST: f64 = 21.0;
                 const MAX_DIST: f64 = 690_129.0;
@@ -328,7 +329,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Very Common";
+                let rarity: Rarity = Rarity::VeryCommon;
 
                 const MIN_DIST: f64 = 3.0;
                 const MAX_DIST: f64 = 7_492_300.0;
@@ -399,7 +400,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME (WITH RINGS)";
                 };
 
-                let rarity: &str = "Very Common";
+                let rarity: Rarity = Rarity::VeryCommon;
 
                 const MIN_DIST: f64 = 1.37026;
                 const MAX_DIST: f64 = 15_653_000.0;
@@ -470,7 +471,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Very Rare";
+                let rarity: Rarity = Rarity::ExtremelyRare;
 
                 const MIN_DIST: f64 = 6.0;
                 const MAX_DIST: f64 = 736_306.0;
@@ -541,7 +542,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Common";
+                let rarity: Rarity = Rarity::Common;
 
                 const MIN_DIST: f64 = 0.147454;
                 const MAX_DIST: f64 = 7_488_550.0;
@@ -612,7 +613,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Uncommon";
+                let rarity: Rarity = Rarity::Uncommon;
 
                 const MIN_DIST: f64 = 5.3542;
                 const MAX_DIST: f64 = 5_339_010.0;
@@ -683,7 +684,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Uncommon";
+                let rarity: Rarity = Rarity::Uncommon;
 
                 const MIN_DIST: f64 = 0.087741;
                 const MAX_DIST: f64 = 7_489_630.0;
@@ -754,7 +755,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME (WITH RINGS)";
                 };
 
-                let rarity: &str = "Very Rare";
+                let rarity: Rarity = Rarity::VeryRare;
 
                 const MIN_DIST: f64 = 159.044;
                 const MAX_DIST: f64 = 5_542.96;
@@ -825,7 +826,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Extremely Rare";
+                let rarity: Rarity = Rarity::Legendary;
 
                 const MIN_DIST: f64 = 7.77777;
                 const MAX_DIST: f64 = 4_200_069.0;
@@ -896,7 +897,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Common";
+                let rarity: Rarity = Rarity::Common;
 
                 const MIN_DIST: f64 = 3.0;
                 const MAX_DIST: f64 = 4_404_300.0;
@@ -967,7 +968,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Rare";
+                let rarity: Rarity = Rarity::Rare;
 
                 const MIN_DIST: f64 = 4.41403;
                 const MAX_DIST: f64 = 841_899.0;
@@ -1038,7 +1039,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Common";
+                let rarity: Rarity = Rarity::Common;
 
                 const MIN_DIST: f64 = 1.61936;
                 const MAX_DIST: f64 = 7_492_280.0;
@@ -1109,7 +1110,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Uncommon";
+                let rarity: Rarity = Rarity::Uncommon;
 
                 const MIN_DIST: f64 = 0.971942;
                 const MAX_DIST: f64 = 7_492_300.0;
@@ -1180,7 +1181,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Very Rare";
+                let rarity: Rarity = Rarity::Rare;
 
                 const MIN_DIST: f64 = 0.319073;
                 const MAX_DIST: f64 = 697_615.0;
@@ -1251,7 +1252,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Very Rare";
+                let rarity: Rarity = Rarity::VeryRare;
 
                 const MIN_DIST: f64 = 2.47592;
                 const MAX_DIST: f64 = 731_999.0;
@@ -1322,7 +1323,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Very Rare";
+                let rarity: Rarity = Rarity::VeryRare;
 
                 const MIN_DIST: f64 = 7.19408;
                 const MAX_DIST: f64 = 4_217_110.0;
@@ -1393,7 +1394,7 @@ impl<'a> PlanetType<'a> {
                     description = "CHANGE ME";
                 };
 
-                let rarity: &str = "Rare";
+                let rarity: Rarity = Rarity::Rare;
 
                 const MIN_DIST: f64 = 5.81925;
                 const MAX_DIST: f64 = 4_214_690.0;
@@ -1470,7 +1471,7 @@ impl<'a> PlanetType<'a> {
                     ringed: i.ringed,
                     type_name: i.type_name,
                     description: i.description,
-                    rarity: i.rarity,
+                    rarity: i.rarity.fetch_rarity(),
                     landable: i.landable,
                     explorable: i.explorable,
                     dist_from_arrival: i.dist_from_arrival,
