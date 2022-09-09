@@ -1,8 +1,6 @@
 use std::io;
 use std::io::Write;
 use clearscreen;
-use rand::Rng;
-use rand::thread_rng as rng;
 use std::time::Duration;
 use stellar_bodies::stars::Star;
 use stellar_bodies::planets::Planet;
