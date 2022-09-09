@@ -9,13 +9,13 @@ use rand::{
 
 #[derive(Debug)]
 pub struct ClassInfo<'a> {
-    pub ringed: bool,
+    pub type_label: &'a str,
     pub type_name: &'a str,
     pub description: &'a str,
     pub rarity: Rarity,
+    pub ringed: bool,
     pub scoopable: bool,
     pub boostable: bool,
-    pub supergiant: bool,
     pub is_moon: bool,
     pub is_primary: bool,
     pub age: u64, // Unit of measurement is "millions of years"
@@ -24,20 +24,19 @@ pub struct ClassInfo<'a> {
     pub surface_temp: i32, // Kelvin
     pub orbital_period: Duration,
     pub rotational_period: Duration,
-
 }
 
 #[derive(Debug)]
 pub struct Stats<'a> {
     pub ringed: bool,
+    pub label: &'a str,
     pub class_name: &'a str,
     pub description: &'a str,
     pub rarity: &'a str,
     pub can_fuel_scoop: bool,
     pub can_fsd_boost: bool,
-    pub is_supergiant: bool,
-    pub is_primary: bool,
     pub is_moon: bool,
+    pub is_primary: bool,
     pub age: u64,
     pub solar_masses: f64,
     pub solar_radii: f64,
@@ -49,20 +48,47 @@ pub struct Stats<'a> {
 #[derive(Debug)]
 pub enum StarClass<'a> {
     O(ClassInfo<'a>),
+    OG(ClassInfo<'a>),
     B(ClassInfo<'a>),
+    BG(ClassInfo<'a>),
     A(ClassInfo<'a>),
+    AG(ClassInfo<'a>),
     F(ClassInfo<'a>),
+    FG(ClassInfo<'a>),
     G(ClassInfo<'a>),
+    GG(ClassInfo<'a>),
     K(ClassInfo<'a>),
+    KG(ClassInfo<'a>),
     M(ClassInfo<'a>),
+    MG(ClassInfo<'a>),
     L(ClassInfo<'a>),
     T(ClassInfo<'a>),
     Y(ClassInfo<'a>),
-    Proto(ClassInfo<'a>),
-    Carbon(ClassInfo<'a>),
-    WR(ClassInfo<'a>),
-    WD(ClassInfo<'a>),
+    AEBE(ClassInfo<'a>),
+    TTS(ClassInfo<'a>),
+    C(ClassInfo<'a>),
+    CJ(ClassInfo<'a>),
+    CN(ClassInfo<'a>),
+    MS(ClassInfo<'a>),
+    S(ClassInfo<'a>),
+    W(ClassInfo<'a>),
+    WC(ClassInfo<'a>),
+    WN(ClassInfo<'a>),
+    WO(ClassInfo<'a>),
     NS(ClassInfo<'a>),
+    PS(ClassInfo<'a>),
+    MGT(ClassInfo<'a>),
+    D(ClassInfo<'a>),
+    DA(ClassInfo<'a>),
+    DAB(ClassInfo<'a>),
+    DAV(ClassInfo<'a>),
+    DAZ(ClassInfo<'a>),
+    DB(ClassInfo<'a>),
+    DBV(ClassInfo<'a>),
+    DBZ(ClassInfo<'a>),
+    DC(ClassInfo<'a>),
+    DCV(ClassInfo<'a>),
+    DQ(ClassInfo<'a>),
     BH(ClassInfo<'a>),
 }
 
@@ -96,13 +122,13 @@ impl<'a> StarClass<'a> {
 
         /* Here is where most property values of different star classes are assigned */
         match class {
-            "O" => {
-                let class_name: &str;
+            "O" => { // Class O (Blue) Stars
+                let type_name: &str;
                 let description: &str;
+                let type_label: &str = "O";
 
                 let scoopable: bool = true;
                 let boostable: bool = false;
-                let supergiant: bool = false;
                 let ringed: bool = false;
                 let is_primary: bool = rng().gen_bool(1.0 / 1.42);
                 let is_moon: bool = rng().gen_bool(1.0 / 42_069.1337);
@@ -141,33 +167,24 @@ impl<'a> StarClass<'a> {
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
                 let rarity: Rarity;
-                if solar_radius >= 360.0 {
-                    supergiant = true;
-                    is_moon = false;
-                    is_primary = true;
-                    rarity = Rarity::new("L");
-                }else {
-                    supergiant = false;
-                };
-
                 if ringed {
-                    class_name = "Ringed Class O Star";
+                    type_name = "Ringed Blue Star";
                     description = "Ringed Class O Star";
                     rarity = Rarity::new("L");
                 }else {
-                    class_name = "Class O Star";
+                    type_name = "Blue Star";
                     description = "Class O Star";
                     rarity = Rarity::new("VR");
                 };
 
                 return Self::O(ClassInfo {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     scoopable,
                     boostable,
-                    supergiant,
                     is_moon,
                     is_primary,
                     age,
@@ -178,11 +195,82 @@ impl<'a> StarClass<'a> {
                     rotational_period,
                 });
             },
-            "B" => {
-                let class_name: &str;
+            "OG" => { // Class O BLue Giants+
+                let type_name: &str;
                 let description: &str;
+                let type_label: &str = "O";
 
-                let supergiant: bool;
+                let ringed: bool = false;
+                let is_moon: bool = false;
+                let scoopable: bool = true;
+                let boostable: bool = false;
+                let is_primary: bool = rng().gen_bool(1.0 / 1.07);
+
+
+                const MIN_AGE: u64 = 2;
+                const MAX_AGE: u64 = 1_420;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
+
+                const MIN_MASS: f64 = 2.960938;
+                const MAX_MASS: f64 = 119.9375;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64 = 200.044562874458;
+                const MAX_RADIUS: f64 = 300.009942683172;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32 = 7_108;
+                const MAX_TEMP: i32 = 105_105;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64 = 0.035106634236;
+                const MAX_ORBITAL: f64 = 2_579_866.94298409;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 50.014184147535;
+                const MAX_ROTATIONAL: f64 = 151.100810185185;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                let rarity: Rarity;
+                if solar_radius >= 200.0 {
+                    type_name = "Blue Supergiant";
+                    description = "Class O Supergiant Star";
+                    rarity = Rarity::new("L");
+                }else {
+                    type_name = "Blue Giant";
+                    description = "Class O Giant Star";
+                    rarity = Rarity::new("ER");
+                };
+
+
+                return Self::OG(ClassInfo {
+                    type_label,
+                    type_name,
+                    description,
+                    rarity,
+                    ringed,
+                    scoopable,
+                    boostable,
+                    is_moon,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "B" => { // Class B (Blue-White) Stars
+                let type_name: &str;
+                let description: &str;
+                let type_label: &str = "B";
+
                 let scoopable: bool = true;
                 let boostable: bool = false;
                 let ringed: bool = rng().gen_bool(1.0 / 20.0);
@@ -203,7 +291,7 @@ impl<'a> StarClass<'a> {
                 let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
 
                 const MIN_RADIUS: f64 = 0.041514797369;
-                const MAX_RADIUS: f64 = 446.9525046844;
+                const MAX_RADIUS: f64 = 300.9525046844;
                 let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
 
                 const MIN_TEMP: i32 = 3_835;
@@ -224,35 +312,25 @@ impl<'a> StarClass<'a> {
 
 
                 let rarity: Rarity;
-                if solar_radius >= 297.0 {
-                    supergiant = true;
-                    is_moon = false;
-                    is_primary = true;
-                    ringed = false;
-                    rarity = Rarity::new("VR");
-                }else {
-                    supergiant = false;
-                };
-
                 if ringed {
-                    class_name = "Ringed B Class Star";
-                    description = "CHANGE ME (Ringed)";
+                    type_name = "Ringed Blue-White Star";
+                    description = "Ringed Class B Star";
                     rarity = Rarity::new("VR");
                 }else {
-                    class_name = "B Class Star";
-                    description = "CHANGE ME";
+                    type_name = "Blue-White Star";
+                    description = "Class B Star";
                     rarity = Rarity::new("R");
                 };
 
 
                 return Self::B(ClassInfo {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     scoopable,
                     boostable,
-                    supergiant,
                     is_moon,
                     is_primary,
                     age,
@@ -263,11 +341,82 @@ impl<'a> StarClass<'a> {
                     rotational_period,
                 });
             },
-            "A" => {
-                let class_name: &str;
+            "BG" => { // Class B Blue-White Giants+
+                let type_name: &str;
                 let description: &str;
+                let type_label: &str = "B";
 
-                let supergiant: bool;
+                let ringed: bool = false;
+                let is_moon: bool = false;
+                let scoopable: bool = true;
+                let boostable: bool = false;
+                let is_primary: bool = rng().gen_bool(1.0 / 1.07);
+
+
+                const MIN_AGE: u64 = 0;
+                const MAX_AGE: u64 = 4_976;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
+
+                const MIN_MASS: f64 = 1.398438;
+                const MAX_MASS: f64 = 106.828125;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64 = 250.067210081282;
+                const MAX_RADIUS: f64 = 499.839161512581;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32 = 6_456;
+                const MAX_TEMP: i32 = 30_699;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64 = 0.074489089769;
+                const MAX_ORBITAL: f64 = 7_381_527.65013553;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.026924294051;
+                const MAX_ROTATIONAL: f64 = 302.311684412442;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                let rarity: Rarity;
+                if solar_radius >= 300.0 {
+                    type_name = "Blue-White Supergiant";
+                    description = "Class B Supergiant Star";
+                    rarity = Rarity::new("ER");
+                }else {
+                    type_name = "Blue-White Giant";
+                    description = "Class B Giant Star";
+                    rarity = Rarity::new("VR");
+                };
+
+
+                return Self::BG(ClassInfo {
+                    type_label,
+                    type_name,
+                    description,
+                    rarity,
+                    ringed,
+                    scoopable,
+                    boostable,
+                    is_moon,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "A" => { // Class A (Blue-White) Stars
+                let type_name: &str;
+                let description: &str;
+                let type_label: &str = "A";
+
                 let scoopable: bool = true;
                 let boostable: bool = false;
                 let ringed: bool = rng().gen_bool(1.0 / 420_069.0);
@@ -288,7 +437,7 @@ impl<'a> StarClass<'a> {
                 let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
 
                 const MIN_RADIUS: f64 = 0.009967209266;
-                const MAX_RADIUS: f64 = 499.437983194824;
+                const MAX_RADIUS: f64 = 145.437983194824;
                 let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
 
                 const MIN_TEMP: i32 = 4_271;
@@ -309,35 +458,25 @@ impl<'a> StarClass<'a> {
 
 
                 let rarity: Rarity;
-                if solar_radius >= 150.0 {
-                    supergiant = true;
-                    is_moon = false;
-                    is_primary = true;
-                    ringed = false;
-                    rarity = Rarity::new("VR");
-                }else {
-                    supergiant = false;
-                };
-
                 if ringed {
-                    class_name = "Ringed A Class Star";
+                    type_name = "Ringed Blue-White Star";
                     description = "Ringed A Class Star";
                     rarity = Rarity::new("ER");
                 }else {
-                    class_name = "A Class (Blue-White) Star";
-                    description = "CHANGE ME";
+                    type_name = "Blue-White Star";
+                    description = "Class A Star";
                     rarity = Rarity::new("UC");
                 };
 
 
                 return Self::A(ClassInfo {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     scoopable,
                     boostable,
-                    supergiant,
                     is_moon,
                     is_primary,
                     age,
@@ -348,11 +487,82 @@ impl<'a> StarClass<'a> {
                     rotational_period,
                 });
             },
-            "F" => {
-                let class_name: &str;
+            "AG" => { // Class A Blue-White Giants+
+                let type_name: &str;
                 let description: &str;
+                let type_label: &str = "A";
 
-                let supergiant: bool;
+                let ringed: bool = false;
+                let is_moon: bool = false;
+                let scoopable: bool = true;
+                let boostable: bool = false;
+                let is_primary: bool = rng().gen_bool(1.0 / 1.0007);
+
+
+                const MIN_AGE: u64 = 1;
+                const MAX_AGE: u64 = 4_944;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
+
+                const MIN_MASS: f64 = 1.398438;
+                const MAX_MASS: f64 = 106.222656;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64 = 145.009967209266;
+                const MAX_RADIUS: f64 = 499.995486780733;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32 = 6_414;
+                const MAX_TEMP: i32 = 30_696;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64 = 0.537583550347;
+                const MAX_ORBITAL: f64 = 5_502_668.04148148;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.090871525521;
+                const MAX_ROTATIONAL: f64 = 284.561458333333;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                let rarity: Rarity;
+                if solar_radius >= 300.0 {
+                    type_name = "Blue-White Supergiant";
+                    description = "Class A Supergiant Star";
+                    rarity = Rarity::new("ER");
+                }else {
+                    type_name = "Blue-White Giant";
+                    description = "Class A Giant Star";
+                    rarity = Rarity::new("VR");
+                };
+
+
+                return Self::AG(ClassInfo {
+                    type_label,
+                    type_name,
+                    description,
+                    rarity,
+                    ringed,
+                    scoopable,
+                    boostable,
+                    is_moon,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "F" => { // Class F (White) Stars
+                let type_name: &str;
+                let description: &str;
+                let type_label: &str = "F";
+
                 let scoopable: bool = true;
                 let boostable: bool = false;
                 let ringed: bool = rng().gen_bool(1.0 / 52.0);
@@ -373,7 +583,7 @@ impl<'a> StarClass<'a> {
                 let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
 
                 const MIN_RADIUS: f64 = 0.499396823391;
-                const MAX_RADIUS: f64 = 214.740608599247;
+                const MAX_RADIUS: f64 = 40.740608599247;
                 let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
 
                 const MIN_TEMP: i32 = 3_798;
@@ -394,35 +604,25 @@ impl<'a> StarClass<'a> {
 
 
                 let rarity: Rarity;
-                if solar_radius >= 50.0 {
-                    supergiant = true;
-                    is_moon = false;
-                    is_primary = true;
-                    ringed = false;
-                    rarity = Rarity::new("VR");
-                }else {
-                    supergiant = false;
-                };
-
                 if ringed {
-                    class_name = "Ringed F Class Star";
-                    description = "CHANGE ME (Ringed)";
+                    type_name = "Ringed White Star";
+                    description = "Ringed Class F Star";
                     rarity = Rarity::new("VR");
                 }else {
-                    class_name = "F Class Star";
-                    description = "CHANGE ME";
+                    type_name = "White Star";
+                    description = "Class F Star";
                     rarity = Rarity::new("C");
                 };
 
 
                 return Self::F(ClassInfo {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     scoopable,
                     boostable,
-                    supergiant,
                     is_moon,
                     is_primary,
                     age,
@@ -433,11 +633,82 @@ impl<'a> StarClass<'a> {
                     rotational_period,
                 });
             },
-            "G" => {
-                let class_name: &str;
+            "FG" => { // Class F White Giants+
+                let type_name: &str;
                 let description: &str;
+                let type_label: &str = "F";
 
-                let supergiant: bool;
+                let ringed: bool = false;
+                let is_moon: bool = false;
+                let scoopable: bool = true;
+                let boostable: bool = false;
+                let is_primary: bool = rng().gen_bool(1.0 / 1.0007);
+
+
+                const MIN_AGE: u64 = 256;
+                const MAX_AGE: u64 = 11_994;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
+
+                const MIN_MASS: f64 = 45.8125;
+                const MAX_MASS: f64 = 4.769531;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64 = 40.499396823391;
+                const MAX_RADIUS: f64 = 214.740608599247;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32 = 4_493;
+                const MAX_TEMP: i32 = 7_499;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64 = 2.459441008391;
+                const MAX_ORBITAL: f64 = 5_528_437.94962963;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 6.445642589225;
+                const MAX_ROTATIONAL: f64 = 1_128.73787037037;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                let rarity: Rarity;
+                if solar_radius >= 150.0 {
+                    type_name = "White Supergiant";
+                    description = "Class F Supergiant Star";
+                    rarity = Rarity::new("ER");
+                }else {
+                    type_name = "White Giant";
+                    description = "Class F Giant Star";
+                    rarity = Rarity::new("VR");
+                };
+
+
+                return Self::FG(ClassInfo {
+                    type_label,
+                    type_name,
+                    description,
+                    rarity,
+                    ringed,
+                    scoopable,
+                    boostable,
+                    is_moon,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "G" => { // Class G (Yellow-White) Stars
+                let type_name: &str;
+                let description: &str;
+                let type_label: &str = "G";
+
                 let scoopable: bool = true;
                 let boostable: bool = false;
                 let ringed: bool = rng().gen_bool(1.0 / 142.0);
@@ -458,7 +729,7 @@ impl<'a> StarClass<'a> {
                 let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
 
                 const MIN_RADIUS: f64 = 0.509979237958;
-                const MAX_RADIUS: f64 = 142.490128563623;
+                const MAX_RADIUS: f64 = 42.000128563623;
                 let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
 
                 const MIN_TEMP: i32 = 3_346;
@@ -479,35 +750,25 @@ impl<'a> StarClass<'a> {
 
 
                 let rarity: Rarity;
-                if solar_radius >= 42.0 {
-                    supergiant = true;
-                    is_moon = false;
-                    is_primary = true;
-                    ringed = false;
-                    rarity = Rarity::new("ER");
-                }else {
-                    supergiant = false;
-                };
-
                 if ringed {
-                    class_name = "Ringed G Class Star";
-                    description = "CHANGE ME (Ringed)";
+                    type_name = "Ringed White-Yellow Star";
+                    description = "Ringed Class G Star";
                     rarity = Rarity::new("ER");
                 }else {
-                    class_name = "G Class Star";
-                    description = "CHANGE ME";
+                    type_name = "White-Yellow Star";
+                    description = "Class G Star";
                     rarity = Rarity::new("C");
                 };
 
 
                 return Self::G(ClassInfo {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     scoopable,
                     boostable,
-                    supergiant,
                     is_moon,
                     is_primary,
                     age,
@@ -518,11 +779,82 @@ impl<'a> StarClass<'a> {
                     rotational_period,
                 });
             },
-            "K" => {
-                let class_name: &str;
+            "GG" => { // Class G White-Yellow Giants+
+                let type_name: &str;
                 let description: &str;
+                let type_label: &str = "G";
 
-                let supergiant: bool;
+                let ringed: bool = false;
+                let is_moon: bool = false;
+                let scoopable: bool = true;
+                let boostable: bool = false;
+                let is_primary: bool = rng().gen_bool(1.0 / 1.0007);
+
+
+                const MIN_AGE: u64 = 2;
+                const MAX_AGE: u64 = 12_792;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
+
+                const MIN_MASS: f64 = 0.796875;
+                const MAX_MASS: f64 = 20.0;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64 = 42.199875279318;
+                const MAX_RADIUS: f64 = 142.490128563623;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32 = 4_428;
+                const MAX_TEMP: i32 = 7_496;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64 = 1.012338152917;
+                const MAX_ORBITAL: f64 = 9_810_303.81037037;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.786495949074;
+                const MAX_ROTATIONAL: f64 = 1_262.85137953275;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                let rarity: Rarity;
+                if solar_radius >= 150.0 {
+                    type_name = "White-Yellow Supergiant";
+                    description = "Class G Supergiant Star";
+                    rarity = Rarity::new("ER");
+                }else {
+                    type_name = "White-Yellow Giant";
+                    description = "Class G Giant Star";
+                    rarity = Rarity::new("VR");
+                };
+
+
+                return Self::GG(ClassInfo {
+                    type_label,
+                    type_name,
+                    description,
+                    rarity,
+                    ringed,
+                    scoopable,
+                    boostable,
+                    is_moon,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "K" => { // Class K (Yellow-Orange) Stars
+                let type_name: &str;
+                let description: &str;
+                let type_label: &str = "K";
+
                 let scoopable: bool = true;
                 let boostable: bool = false;
                 let ringed: bool = rng().gen_bool(1.0 / 27.0);
@@ -534,16 +866,16 @@ impl<'a> StarClass<'a> {
                 const MAX_AGE: u64 = 13_062;
                 let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
 
-                const MIN_MASS: f64 = 0.449218988419;
-                const MAX_MASS: f64 = 13.097656;
+                const MIN_MASS: f64 = 0.265625;
+                const MAX_MASS: f64 = 13.523438;
                 let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
 
-                const MIN_RADIUS: f64 = 0.104853824281;
-                const MAX_RADIUS: f64 = 907.527721837034;
+                const MIN_RADIUS: f64 = 0.188995347232;
+                const MAX_RADIUS: f64 = 58.710197095615;
                 let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
 
-                const MIN_TEMP: i32 = 3_255;
-                const MAX_TEMP: i32 = 8_442;
+                const MIN_TEMP: i32 = 2_494;
+                const MAX_TEMP: i32 = 30_024;
                 let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_ORBITAL: f64 = 0.086368436458;
@@ -553,30 +885,20 @@ impl<'a> StarClass<'a> {
                 let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
 
                 const MIN_ROTATIONAL: f64 = 0.549157895694;
-                const MAX_ROTATIONAL: f64 = 4_491.19099445159;
+                const MAX_ROTATIONAL: f64 = 427.435192176401;
                 let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
                 let rotational_secs: f64 = orbital_range * 86_400.0;
                 let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
 
 
                 let rarity: Rarity;
-                if solar_radius >= 58.0 {
-                    supergiant = true;
-                    is_moon = false;
-                    is_primary = true;
-                    ringed = false;
-                    rarity = Rarity::new("VR");
-                }else {
-                    supergiant = false;
-                };
-
                 if ringed {
-                    class_name = "Ringed K Class Star";
-                    description = "CHANGE ME (Ringed)";
+                    type_name = "Ringed Yellow-Orange Star";
+                    description = "Ringed Class K Star";
                     rarity = Rarity::new("VR");
                 }else {
-                    class_name = "K Class Star";
-                    description = "CHANGE ME";
+                    type_name = "Yellow-Orange Star";
+                    description = "Class K Star";
                     rarity = Rarity::new("C");
                 };
 
@@ -586,13 +908,13 @@ impl<'a> StarClass<'a> {
 
 
                 return Self::K(ClassInfo {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     scoopable,
                     boostable,
-                    supergiant,
                     is_moon,
                     is_primary,
                     age,
@@ -603,11 +925,86 @@ impl<'a> StarClass<'a> {
                     rotational_period,
                 });
             },
-            "M" => {
-                let class_name: &str;
+            "KG" => { // Class K Yellow-Orange Giants+
+                let type_name: &str;
                 let description: &str;
+                let type_label: &str = "K";
 
-                let supergiant: bool;
+                let ringed: bool = false;
+                let is_moon: bool = false;
+                let scoopable: bool = true;
+                let boostable: bool = false;
+                let is_primary: bool = rng().gen_bool(1.0 / 1.0007);
+
+
+                const MIN_AGE: u64 = 24;
+                const MAX_AGE: u64 = 13_062;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
+
+                const MIN_MASS: f64 = 0.449218988419;
+                const MAX_MASS: f64 = 13.097656;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64 = 55.104853824281;
+                const MAX_RADIUS: f64 = 907.527721837034;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32 = 3_255;
+                const MAX_TEMP: i32 = 8_442;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64 = 0.291476440428;
+                const MAX_ORBITAL: f64 = 203_291_043.91513;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.36237599088;
+                const MAX_ROTATIONAL: f64 = 4_491.19099445159;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                let rarity: Rarity;
+                if solar_radius >= 777.0 {
+                    type_name = "Yellow-Orange Hypergiant";
+                    description = "Class K Hypergiant Star";
+                    rarity = Rarity::new("L");
+                }else if solar_radius >= 150.0 {
+                    type_name = "Yellow-Orange Supergiant";
+                    description = "Class K Supergiant Star";
+                    rarity = Rarity::new("ER");
+                }else {
+                    type_name = "Yellow-Orange Giant";
+                    description = "Class K Giant Star";
+                    rarity = Rarity::new("VR");
+                };
+
+
+                return Self::KG(ClassInfo {
+                    type_label,
+                    type_name,
+                    description,
+                    rarity,
+                    ringed,
+                    scoopable,
+                    boostable,
+                    is_moon,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "M" => { // Class M (Red Dwarf) Stars
+                let type_name: &str;
+                let description: &str;
+                let type_label: &str = "M";
+
                 let scoopable: bool;
                 let boostable: bool;
                 let ringed: bool = rng().gen_bool(1.0 / 17.0);
@@ -649,34 +1046,24 @@ impl<'a> StarClass<'a> {
 
 
                 let rarity: Rarity;
-                if solar_radius >= 420.0 {
-                    supergiant = true;
-                    is_moon = false;
-                    is_primary = true;
-                    ringed = false;
-                    rarity = Rarity::new("R");
-                }else {
-                    supergiant = false;
-                };
-
                 if ringed {
-                    class_name = "Ringed M Class Star";
-                    description = "CHANGE ME (Ringed)";
+                    type_name = "Ringed Red Dwarf";
+                    description = "Ringed Class M Red Dwarf";
                     rarity = Rarity::new("R");
                 }else {
-                    class_name = "M Class Star";
-                    description = "CHANGE ME";
+                    type_name = "Red Dwarf";
+                    description = "Class M Red Dwarf";
                 };
 
 
                 return Self::M(ClassInfo {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     scoopable,
                     boostable,
-                    supergiant,
                     is_moon,
                     is_primary,
                     age,
@@ -687,13 +1074,88 @@ impl<'a> StarClass<'a> {
                     rotational_period,
                 });
             },
-            "L" => {
-                let class_name: &str;
+            "MG" => { // Class M Red Giants+
+                let type_name: &str;
                 let description: &str;
+                let type_label: &str = "M";
+
+                let ringed: bool = false;
+                let is_moon: bool = false;
+                let scoopable: bool = true;
+                let boostable: bool = false;
+                let is_primary: bool = rng().gen_bool(1.0 / 1.0007);
+
+
+                const MIN_AGE: u64 = 24;
+                const MAX_AGE: u64 = 13_065;
+                let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
+
+                const MIN_MASS: f64 = 0.199219;
+                const MAX_MASS: f64 = 25.0;
+                let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
+
+                const MIN_RADIUS: f64 = 67.104853824281;
+                const MAX_RADIUS: f64 = 1_418.28698100353;
+                let solar_radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+
+                const MIN_TEMP: i32 = 1_859;
+                const MAX_TEMP: i32 = 5_199;
+                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
+
+                const MIN_ORBITAL: f64 = 0.192648970995;
+                const MAX_ORBITAL: f64 = 21_461_973.522963;
+                let orbital_range: f64 = rng().gen_range(MIN_ORBITAL..=MAX_ORBITAL);
+                let orbital_secs: f64 = orbital_range * 86_400.0;
+                let orbital_period: Duration = Duration::from_secs_f64(orbital_secs);
+
+                const MIN_ROTATIONAL: f64 = 0.801408171296;
+                const MAX_ROTATIONAL: f64 = 8_089.64444444444;
+                let rotational_range: f64 = rng().gen_range(MIN_ROTATIONAL..=MAX_ROTATIONAL);
+                let rotational_secs: f64 = orbital_range * 86_400.0;
+                let rotational_period: Duration = Duration::from_secs_f64(rotational_secs);
+
+
+                let rarity: Rarity;
+                if solar_radius >= 1_000.0 {
+                    type_name = "Red Hypergiant";
+                    description = "Class M Red Hypergiant";
+                    rarity = Rarity::new("ER");
+                }else if solar_radius >= 602.0 {
+                    type_name = "Red Supergiant";
+                    description = "Class M Red Supergiant";
+                    rarity = Rarity::new("VR");
+                }else {
+                    type_name = "Red Giant";
+                    description = "Class M Red Giant";
+                    rarity = Rarity::new("R");
+                };
+
+
+                return Self::MG(ClassInfo {
+                    type_label,
+                    type_name,
+                    description,
+                    rarity,
+                    ringed,
+                    scoopable,
+                    boostable,
+                    is_moon,
+                    is_primary,
+                    age,
+                    solar_masses,
+                    solar_radius,
+                    surface_temp,
+                    orbital_period,
+                    rotational_period,
+                });
+            },
+            "L" => { // Class L Brown Dwarfs
+                let type_name: &str;
+                let description: &str;
+                let type_label: &str = "L";
 
                 let scoopable: bool = false;
                 let boostable: bool = false;
-                let supergiant: bool = false;
                 let ringed: bool = rng().gen_bool(1.0 / 15.0);
                 let is_primary: bool = rng().gen_bool(1.0 / 7.0);
                 let is_moon: bool = rng().gen_bool(1.0 / 11.0);
@@ -749,13 +1211,13 @@ impl<'a> StarClass<'a> {
 
 
                 return Self::L(ClassInfo {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     scoopable,
                     boostable,
-                    supergiant,
                     is_moon,
                     is_primary,
                     age,
@@ -766,11 +1228,11 @@ impl<'a> StarClass<'a> {
                     rotational_period,
                 });
             },
-            "T" => {
-                let class_name: &str;
+            "T" => { // Class T Brown Dwarfs
+                let type_name: &str;
                 let description: &str;
+                let type_label: &str = "T";
 
-                let supergiant: bool = false;
                 let scoopable: bool = false;
                 let boostable: bool = false;
                 let ringed: bool = rng().gen_bool(1.0 / 3.0);
@@ -813,7 +1275,7 @@ impl<'a> StarClass<'a> {
 
                 let rarity: Rarity;
                 if ringed {
-                    class_name = "Ringed Class T Brown Dwarf";
+                    type_name = "Ringed Class T Brown Dwarf";
                     description = "CHANGE ME (Ringed)";
                     if is_moon {
                         rarity = Rarity::new("C");
@@ -821,20 +1283,20 @@ impl<'a> StarClass<'a> {
                         rarity = Rarity::new("UC");
                     };
                 }else {
-                    class_name = "Class T Brown Dwarf";
+                    type_name = "Class T Brown Dwarf";
                     description = "CHANGE ME";
                     rarity = Rarity::new("C");
                 };
 
 
                 return Self::T(ClassInfo {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     scoopable,
                     boostable,
-                    supergiant,
                     is_moon,
                     is_primary,
                     age,
@@ -845,13 +1307,13 @@ impl<'a> StarClass<'a> {
                     rotational_period,
                 });
             },
-            "Y" => {
-                let class_name: &str;
+            "Y" => { // Class Y Brown Dwarfs
+                let type_name: &str;
                 let description: &str;
+                let type_label: &str;
 
                 let scoopable: bool = false;
                 let boostable: bool = false;
-                let supergiant: bool = false;
                 let ringed: bool = rng().gen_bool(1.0 / 2.0);
                 let is_primary: bool = rng().gen_bool(1.0 / 7.0);
                 let is_moon: bool = rng().gen_bool(1.0 / 3.0);
@@ -892,7 +1354,7 @@ impl<'a> StarClass<'a> {
 
                 let rarity: Rarity;
                 if ringed {
-                    class_name = "Ringed Class Y Brown Dwarf";
+                    type_name = "Ringed Class Y Brown Dwarf";
                     description = "CHANGE ME (Ringed)";
                     if is_primary {
                         rarity = Rarity::new("UC");
@@ -901,20 +1363,20 @@ impl<'a> StarClass<'a> {
                     };
                     
                 }else {
-                    class_name = "Class Y Brown Dwarf";
+                    type_name = "Class Y Brown Dwarf";
                     description = "CHANGE ME";
                     rarity = Rarity::new("C");
                 };
 
 
                 return Self::Y(ClassInfo {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     scoopable,
                     boostable,
-                    supergiant,
                     is_moon,
                     is_primary,
                     age,
@@ -928,12 +1390,12 @@ impl<'a> StarClass<'a> {
             _ => {
 
 
-                // let class_name: &str;
+                // let type_name: &str;
                 // let description: &str;
+                // let type_label: str;
 
                 // let scoopable: bool;
                 // let boostable: bool;
-                // let supergiant: bool;
                 // let ringed: bool;
                 // let is_primary: bool;
                 // let is_moon: bool;
@@ -973,35 +1435,25 @@ impl<'a> StarClass<'a> {
 
 
                 // let rarity: Rarity;
-                // if solar_radius >= 420.0 {
-                //     supergiant = true;
-                //     is_moon = false;
-                //     is_primary = true;
-                //     ringed = false;
-                //     rarity = Rarity::new("");
-                // }else {
-                //     supergiant = false;
-                // };
-
                 // if ringed {
-                //     class_name = "CHANGE ME (Ringed)";
+                //     type_name = "CHANGE ME (Ringed)";
                 //     description = "CHANGE ME (Ringed)";
                 //     rarity = Rarity::new("");
                 // }else {
-                //     class_name = "CHANGE ME";
+                //     type_name = "CHANGE ME";
                 //     description = "CHANGE ME";
                 //     rarity = Rarity::new("");
                 // };
 
 
                 // return Self::CHANGEME(ClassInfo {
-                //     ringed,
+                //     type_label,
                 //     type_name,
                 //     description,
                 //     rarity,
+                //     ringed,
                 //     scoopable,
                 //     boostable,
-                //     supergiant,
                 //     is_moon,
                 //     is_primary,
                 //     age,
