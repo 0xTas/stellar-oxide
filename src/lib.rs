@@ -9,6 +9,30 @@ use stellar_bodies::planets::Planet;
 
 pub mod stellar_bodies;
 
+
+pub enum Rarity<'a> {
+    VeryCommon(&'a str),
+    Common(&'a str),
+    Uncommon(&'a str),
+    Rare(&'a str),
+    VeryRare(&'a str),
+    Legendary(&'a str),
+}
+
+impl<'a> Rarity<'a> {
+    pub fn new(rarity: &str) -> Self {
+        match rarity {
+            "VC" => Self::VeryCommon("Very Common"),
+            "C" => Self::Common("Common"),
+            "UC" => Self::Uncommon("Uncommon"),
+            "R" => Self::Rare("Rare"),
+            "VR" => Self::VeryRare("Very Rare"),
+            "L" => Self::Legendary("Legendary"),
+            _ => panic!("Invalid Rarity!"),
+        }
+    }
+}
+
 pub fn create_random_star() -> Star<'static> {
     // TODO: source random names and subtypes
     Star::new("Lorem Ipsum", "surprise me", None)
