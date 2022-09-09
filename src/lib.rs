@@ -11,7 +11,7 @@ pub mod stellar_bodies;
 
 
 #[derive(Debug)]
-pub enum Rarity<'a> {
+pub enum Rarity {
     VeryCommon,
     Common,
     Uncommon,
