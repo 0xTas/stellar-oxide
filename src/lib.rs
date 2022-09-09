@@ -21,6 +21,10 @@ pub enum Rarity {
 }
 
 impl Rarity {
+    /// Returns a new instance of the *Rarity* enum based on an identifier *&str*.
+    /// 
+    /// **Valid Identifiers:**
+    /// [VC, C, UC, R, VR, ER, L]
     pub fn new(rarity: &str) -> Self {
         match rarity {
             "VC" => Self::VeryCommon,
@@ -34,6 +38,7 @@ impl Rarity {
         }
     }
 
+    /// Returns a stringified representation of the calling *Rarity* enum.
     pub fn fetch_rarity(&self) -> &str {
         match self {
             Rarity::VeryCommon => "Very Common",
@@ -48,30 +53,38 @@ impl Rarity {
 }
 
 
+/// Returns a randomly-initialized instance of the *Star* struct.
 pub fn create_random_star() -> Star<'static> {
     // TODO: source random names and subtypes
     Star::new("Lorem Ipsum", "surprise me")
 }
 
+/// Returns a randomly-initialized instance of the *Planet* struct.
 pub fn create_random_planet() -> Planet<'static> {
     Planet::new("Lorem Ipsum 1", "random")
 }
 
 /* Utility Functions */
+
+/// Flushes stdout, panics upon failure.
 pub fn flush() {
     io::stdout().flush().expect("Write to console failed!");
 }
 
+/// Flushes stdout, and then sleeps for the provided time in miliseconds
+/// **(panics upon failure)**.
 pub fn wait(duration: u32) {
     flush();
     let duration: Duration = Duration::from_millis(duration.into());
     sleep(duration);
 }
 
+/// Clears the console screen. Panics upon failure.
 pub fn cls() {
     clearscreen::clear().unwrap();
 }
 
+/// Prompts the user for input and returns it as a *String*. Panics upon failure.
 pub fn input() -> String {
     let mut user_input = String::new();
 
