@@ -50,7 +50,7 @@ impl Rarity {
 
 pub fn create_random_star() -> Star<'static> {
     // TODO: source random names and subtypes
-    Star::new("Lorem Ipsum", "surprise me", None)
+    Star::new("Lorem Ipsum", "surprise me")
 }
 
 pub fn create_random_planet() -> Planet<'static> {

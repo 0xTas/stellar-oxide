@@ -2896,16 +2896,14 @@ impl<'a> StarClass<'a> {
 pub struct Star<'a> {
     pub name: &'a str,
     pub class: StarClass<'a>,
-    pub subtype: Option<&'a str>,
 }
 
 impl<'a> Star<'a> {
-    pub fn new(name: &'a str, class: &'a str, subtype: Option<&'a str>) -> Self {
+    pub fn new(name: &'a str, class: &'a str) -> Self {
         let class = StarClass::new(class);
         Star {
             name,
             class,
-            subtype,
         }
     }
 
