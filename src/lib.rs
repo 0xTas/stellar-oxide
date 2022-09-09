@@ -80,30 +80,3 @@ pub fn input() -> String {
 
     user_input
 }
-
-pub fn decide_ringed() -> bool {
-    let chance = rng().gen_range(0..=1337);
-    if chance == 1337 || chance == 420 || chance == 69 {
-        return true;
-    }else if chance < 7 {
-        return true;
-    }else {
-        return false;
-    };
-}
-
-pub fn is_landable(pressure: f64, temp: i32) -> bool {
-    if pressure <= 4.20 && temp <= 666 {
-        return true;
-    }else {
-        return false;
-    };
-}
-
-pub fn is_explorable(pressure: f64, temp: i32, gravity: f64) -> bool {
-    if pressure <= 2.25 && temp <= 370 && gravity <= 4.20 {
-        return true;
-    }else {
-        return false;
-    };
-}
