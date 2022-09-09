@@ -97,7 +97,11 @@ impl<'a> Distribution<PlanetType<'a>> for Standard {
 
 impl<'a> PlanetType<'a> {
 
-    /* PlanetType statistics taken from https://edastro.com/records */
+    /// Returns a new instance of the *PlanetType* enum with randomly-initialized values.
+    /// Accepts a type identifier as a &str, but will return a random *PlanetType* if an invalid identifier is provided.
+    /// 
+    /// **Valid Identifiers:**
+    /// [AW, WW, WG, RKB, ICB, ELW, HMC, RIW, MRB, HGG, GGGG, CIGG, CIIGG, CIIIGG, CIVGG, CVGG, HRGG, GGWABL, GGWWBL]
     pub fn new(planet_type: &str) -> Self {
 
         // TODO: Calculate stat numbers with a weighted bias towards the middle.
@@ -1497,12 +1501,18 @@ pub struct Planet<'a> {
 }
 
 impl<'a> Planet<'a> {
+    /// Returns an instance of the *Planet* struct with randomly-initialized properties.
+    /// Expects a name and a planet-type identifier, but will provide a random *PlanetType* if an invalid identifier is provided.
+    ///
+    /// **Valid Identifiers:**
+    /// [AW, WW, WG, RKB, ICB, ELW, HMC, RIW, MRB, HGG, GGGG, CIGG, CIIGG, CIIIGG, CIVGG, CVGG, HRGG, GGWABL, GGWWBL]
     pub fn new(name: &'a str, ptype: &'a str) -> Self {
         match ptype {
             _ => return Planet{ name, ptype: PlanetType::new(ptype)},
         };
     }
 
+    /// Returns the *Stats* struct for the currently-calling *Planet* instance.
     pub fn stats(&self) -> Stats {
         let stats = &self.ptype;
         stats.extract_stats()
@@ -1511,6 +1521,8 @@ impl<'a> Planet<'a> {
 
 
 /* Planetary Util Functions */
+
+/// Uses pressure and tempurature to determine whether or not the environment is safe to land a spaceship on.
 fn is_landable(pressure: f64, temp: i32) -> bool {
     if pressure <= 4.20 && temp <= 666 {
         return true;
@@ -1519,6 +1531,7 @@ fn is_landable(pressure: f64, temp: i32) -> bool {
     };
 }
 
+/// Uses pressure, tempurature, and gravity to determine if the environment is fit for on-foot exploration.
 fn is_explorable(pressure: f64, temp: i32, gravity: f64) -> bool {
     if pressure <= 2.25 && temp <= 370 && gravity <= 4.20 {
         return true;
