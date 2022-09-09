@@ -10,6 +10,7 @@ use stellar_bodies::planets::Planet;
 pub mod stellar_bodies;
 
 
+#[derive(Debug)]
 pub enum Rarity<'a> {
     VeryCommon(&'a str),
     Common(&'a str),
