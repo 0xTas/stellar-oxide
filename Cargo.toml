@@ -1,6 +1,6 @@
 [package]
-name = "oasis"
-version = "0.1.0"
+name = "stellar-oxide"
+version = "0.1.1"
 edition = "2021"
 
 [dependencies]
