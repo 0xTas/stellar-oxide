@@ -1,7 +1,7 @@
 // use rand::Rng;
-use oasis::stellar_bodies::stars::Star;
-use oasis::stellar_bodies::planets::Planet;
-use oasis::{cls, wait, input, create_random_star, create_random_planet};
+use stellar_oxide::bodies::stars::Star;
+use stellar_oxide::bodies::planets::Planet;
+use stellar_oxide::{cls, wait, input, create_random_star, create_random_planet};
 
 
 /* Current goal is to generate random star systems

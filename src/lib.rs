@@ -4,10 +4,10 @@ use rand::Rng;
 use clearscreen;
 use std::time::Duration;
 use std::thread::sleep;
-use stellar_bodies::stars::Star;
-use stellar_bodies::planets::Planet;
+use bodies::stars::Star;
+use bodies::planets::Planet;
 
-pub mod stellar_bodies;
+pub mod bodies;
 
 
 #[derive(Debug)]
