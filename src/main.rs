@@ -92,24 +92,24 @@ fn main() {
         let answer_planet: String = input();
         wait(420);
 
-            loop {
-                cls();
-                let star: Star = create_random_star();
-                let planet: Planet = create_random_planet();
-                println!("{:#?}", star);
-                for _ in 0..42 { print!("-"); };
-                println!("\n{:#?}", planet);
-                let answer_star: &str = answer_star.trim();
-                let answer_planet: &str = answer_planet.trim();
-                if star.stats().label == answer_star && planet.stats().type_name.to_lowercase() == answer_planet.to_lowercase() {
-                    println!();
-                    wait(10000);
-                    break;
-                }else {
-                    println!();
-                    wait(4);
-                };
+        loop {
+            cls();
+            let star: Star = create_random_star();
+            let planet: Planet = create_random_planet();
+            println!("{:#?}", star);
+            for _ in 0..=69 { print!("-"); };
+            println!("\n{:#?}", planet);
+            let answer_star: &str = answer_star.trim();
+            let answer_planet: &str = answer_planet.trim();
+            if star.stats().label == answer_star && planet.stats().type_name.to_lowercase() == answer_planet.to_lowercase() {
+                println!();
+                wait(30000);
+                break;
+            }else {
+                println!();
+                wait(2);
+            };
 
-            }
+        }
     }
 }
