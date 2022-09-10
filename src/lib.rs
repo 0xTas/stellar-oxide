@@ -55,13 +55,13 @@ impl Rarity {
 
 
 /// Returns a randomly-initialized instance of the *Star* struct.
-pub fn create_random_star() -> Star<'static> {
+pub fn create_random_star<'a>() -> Star<'a> {
     let name: String = format!("EC_Entry_{:#02x}", rand::thread_rng().gen_range(0x00..=0xffffff));
     Star::new(name, "random")
 }
 
 /// Returns a randomly-initialized instance of the *Planet* struct.
-pub fn create_random_planet() -> Planet<'static> {
+pub fn create_random_planet<'a>() -> Planet<'a> {
     let name: String = format!("planet_{:#02x}", rand::thread_rng().gen_range(0x00..=0xffffff));
     Planet::new(name, "random")
 }
