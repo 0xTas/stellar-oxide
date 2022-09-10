@@ -39,10 +39,11 @@ fn main() {
                 let current_star: Star = create_random_star();
   
                 println!(" You've been here for quite some time already...");
-                println!(" Your current location is the system {}.\n It is a remote {} located on the far side of the galaxy.", current_star.name, current_star.stats().class_name);
-                wait(7000);
-                println!(" Current: {:#?}", current_star);
+                println!(" Your current location is the system {}.\n It is a remote {} located on the far side of the galaxy.",
+                        current_star.name, current_star.stats().class_name);
                 wait(2000);
+                println!(" Current: {:#?}", current_star);
+                wait(4000);
                 
                 let random_planet: Planet = create_random_planet();
                 println!();
