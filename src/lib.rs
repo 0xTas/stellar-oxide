@@ -56,7 +56,7 @@ impl Rarity {
 
 /// Returns a randomly-initialized instance of the *Star* struct.
 pub fn create_random_star<'a>() -> Star<'a> {
-    let name: String = format!("EC_Entry_{:#02x}", rand::thread_rng().gen_range(0x00..=0xffffff));
+    let name: String = format!("star_{:#02x}", rand::thread_rng().gen_range(0x00..=0xffffff));
     Star::new(name, "random")
 }
 
