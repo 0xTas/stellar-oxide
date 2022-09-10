@@ -217,7 +217,7 @@ impl<'a> StarClass<'a> {
             "OG" => { // Class O BLue Giants+
                 let type_name: &str;
                 let description: &str;
-                let type_label: &str = "O";
+                let type_label: &str = "OG";
 
                 let ringed: bool = false;
                 let scoopable: bool = true;
@@ -351,7 +351,7 @@ impl<'a> StarClass<'a> {
             "BG" => { // Class B Blue-White Giants+
                 let type_name: &str;
                 let description: &str;
-                let type_label: &str = "B";
+                let type_label: &str = "BG";
 
                 let ringed: bool = false;
                 let scoopable: bool = true;
@@ -485,7 +485,7 @@ impl<'a> StarClass<'a> {
             "AG" => { // Class A Blue-White Giants+
                 let type_name: &str;
                 let description: &str;
-                let type_label: &str = "A";
+                let type_label: &str = "AG";
 
                 let ringed: bool = false;
                 let scoopable: bool = true;
@@ -619,7 +619,7 @@ impl<'a> StarClass<'a> {
             "FG" => { // Class F White Giants+
                 let type_name: &str;
                 let description: &str;
-                let type_label: &str = "F";
+                let type_label: &str = "FG";
 
                 let ringed: bool = false;
                 let scoopable: bool = true;
@@ -753,7 +753,7 @@ impl<'a> StarClass<'a> {
             "GG" => { // Class G White-Yellow Giants+
                 let type_name: &str;
                 let description: &str;
-                let type_label: &str = "G";
+                let type_label: &str = "GG";
 
                 let ringed: bool = false;
                 let scoopable: bool = true;
@@ -887,7 +887,7 @@ impl<'a> StarClass<'a> {
             "KG" => { // Class K Yellow-Orange Giants+
                 let type_name: &str;
                 let description: &str;
-                let type_label: &str = "K";
+                let type_label: &str = "KG";
 
                 let ringed: bool = false;
                 let scoopable: bool = true;
@@ -1025,7 +1025,7 @@ impl<'a> StarClass<'a> {
             "MG" => { // Class M Red Giants+
                 let type_name: &str;
                 let description: &str;
-                let type_label: &str = "M";
+                let type_label: &str = "MG";
 
                 let ringed: bool = false;
                 let scoopable: bool = true;
