@@ -1,4 +1,4 @@
-use rand::Rng;
+// use rand::Rng;
 use oasis::stellar_bodies::stars::Star;
 use oasis::stellar_bodies::planets::Planet;
 use oasis::{cls, wait, input, create_random_star, create_random_planet};
