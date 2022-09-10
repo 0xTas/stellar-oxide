@@ -9,10 +9,11 @@ use rand::{
 
 #[derive(Debug)]
 pub struct PlanetTypeProperties<'a> {
-    pub ringed: bool,
+    pub type_label: &'a str,
     pub type_name: &'a str,
     pub description: &'a str,
     pub rarity: Rarity,
+    pub ringed: bool,
     pub landable: bool,
     pub explorable: bool,
     pub dist_from_arrival: f64, // Light-Seconds
@@ -27,10 +28,11 @@ pub struct PlanetTypeProperties<'a> {
 
 #[derive(Debug)]
 pub struct Stats<'a> {
-    pub ringed: bool,
+    pub label: &'a str,
     pub type_name: &'a str,
     pub description: &'a str,
     pub rarity: &'a str,
+    pub ringed: bool,
     pub landable: bool,
     pub explorable: bool,
     pub dist_from_arrival: f64,
@@ -112,12 +114,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Ammonia World";
                     description = "Terrestrial ammonia world";
+                    type_label = "AW(R)";
                 }else {
                     type_name = "Ammonia World";
                     description = "TODO";
+                    type_label = "AW";
                 };
 
                 let rarity: Rarity = Rarity::VeryRare;
@@ -162,10 +167,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::AW(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -183,12 +189,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Water World";
                     description = "TODO";
+                    type_label = "WW(R)";
                 }else {
                     type_name = "Water World";
                     description = "TODO";
+                    type_label = "WW";
                 };
 
                 let rarity: Rarity = Rarity::Rare;
@@ -233,10 +242,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::WW(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -254,12 +264,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Water Giant";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "WG(R)";
                 }else {
                     type_name = "Water Giant";
                     description = "CHANGE ME";
+                    type_label = "WG";
                 };
 
                 let rarity: Rarity = Rarity::VeryRare;
@@ -304,10 +317,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::WG(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -325,12 +339,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Rocky Body";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "RKB(R)";
                 }else {
                     type_name = "Rocky Body";
                     description = "CHANGE ME";
+                    type_label = "RKB";
                 };
 
                 let rarity: Rarity = Rarity::VeryCommon;
@@ -375,10 +392,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::RKB(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -396,12 +414,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Icy Body";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "ICB(R)";
                 }else {
                     type_name = "Icy Body";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "ICB";
                 };
 
                 let rarity: Rarity = Rarity::VeryCommon;
@@ -446,10 +467,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::ICB(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -467,12 +489,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Earth-like World";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "ELW(R)";
                 }else {
                     type_name = "Earth-like World";
                     description = "CHANGE ME";
+                    type_label = "ELW";
                 };
 
                 let rarity: Rarity = Rarity::ExtremelyRare;
@@ -517,10 +542,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::ELW(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -538,12 +564,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed High Metal Content Planet";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "HMC(R)";
                 }else {
                     type_name = "High Metal Content Planet";
                     description = "CHANGE ME";
+                    type_label = "HMC"
                 };
 
                 let rarity: Rarity = Rarity::Common;
@@ -588,10 +617,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::HMC(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -609,12 +639,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Rocky Ice World (Ringed)";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "RIW(R)";
                 }else {
                     type_name = "Rocky Ice World";
                     description = "CHANGE ME";
+                    type_label = "RIW";
                 };
 
                 let rarity: Rarity = Rarity::Uncommon;
@@ -659,10 +692,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::RIW(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -680,12 +714,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Metal-Rich Body (Ringed)";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "MRB(R)";
                 }else {
                     type_name = "Metal-Rich Body";
                     description = "CHANGE ME";
+                    type_label = "MRB";
                 };
 
                 let rarity: Rarity = Rarity::Uncommon;
@@ -730,10 +767,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::MRB(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -751,12 +789,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Helium Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "HGG(R)";
                 }else {
                     type_name = "Helium Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "HGG";
                 };
 
                 let rarity: Rarity = Rarity::VeryRare;
@@ -801,10 +842,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::HGG(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -822,12 +864,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Glowing Green Gas Giant (Ringed)";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "GGGG(R)";
                 }else {
                     type_name = "Glowing Green Gas Giant";
                     description = "CHANGE ME";
+                    type_label = "GGGG";
                 };
 
                 let rarity: Rarity = Rarity::Legendary;
@@ -872,10 +917,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::GGGG(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -893,12 +939,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Class I Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "CIGG(R)";
                 }else {
                     type_name = "Class I Gas Giant";
                     description = "CHANGE ME";
+                    type_label = "CIIGG";
                 };
 
                 let rarity: Rarity = Rarity::Common;
@@ -943,10 +992,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::CIGG(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -964,12 +1014,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Class II Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "CIIGG(R)";
                 }else {
                     type_name = "Class II Gas Giant";
                     description = "CHANGE ME";
+                    type_label = "CIIGG";
                 };
 
                 let rarity: Rarity = Rarity::Rare;
@@ -1014,10 +1067,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::CIIGG(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -1035,12 +1089,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Class III Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "CIIIGG";
                 }else {
                     type_name = "Class III Gas Giant";
                     description = "CHANGE ME";
+                    type_label = "CIIIGG";
                 };
 
                 let rarity: Rarity = Rarity::Common;
@@ -1085,10 +1142,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::CIIIGG(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -1106,12 +1164,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Class IV Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "CIVGG(R)";
                 }else {
                     type_name = "Class IV Gas Giant";
                     description = "CHANGE ME";
+                    type_label = "CIVGG";
                 };
 
                 let rarity: Rarity = Rarity::Uncommon;
@@ -1156,10 +1217,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::CIVGG(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -1177,12 +1239,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Class V Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "CVGG(R)";
                 }else {
                     type_name = "Class V Gas Giant";
                     description = "CHANGE ME";
+                    type_label = "CVGG";
                 };
 
                 let rarity: Rarity = Rarity::Rare;
@@ -1227,10 +1292,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::CVGG(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -1248,12 +1314,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Ringed Helium-Rich Gas Giant";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "HRGG(R)";
                 }else {
                     type_name = "Helium-Rich Gas Giant";
                     description = "CHANGE ME";
+                    type_label = "HRGG";
                 };
 
                 let rarity: Rarity = Rarity::VeryRare;
@@ -1298,10 +1367,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::HRGG(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -1319,12 +1389,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Gas Giant With Ammonia-Based Life (Ringed)";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "GGWABL(R)";
                 }else {
                     type_name = "Gas Giant With Ammonia-Based Life";
                     description = "CHANGE ME";
+                    type_label = "GGWABL";
                 };
 
                 let rarity: Rarity = Rarity::VeryRare;
@@ -1369,10 +1442,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::GGWABL(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -1390,12 +1464,15 @@ impl<'a> PlanetType<'a> {
 
                 let type_name: &str;
                 let description: &str;
+                let type_label: &str;
                 if ringed {
                     type_name = "Gas Giant With Water-Based Life (Ringed)";
                     description = "CHANGE ME (WITH RINGS)";
+                    type_label = "GGWWBL(R)";
                 }else {
                     type_name = "Gas Giant With Water-Based Life";
                     description = "CHANGE ME";
+                    type_label = "GGWWBL";
                 };
 
                 let rarity: Rarity = Rarity::Rare;
@@ -1440,10 +1517,11 @@ impl<'a> PlanetType<'a> {
                 let explorable: bool = is_explorable(surface_pressure, surface_temp, gravity);
 
                 return Self::GGWWBL(PlanetTypeProperties {
-                    ringed,
+                    type_label,
                     type_name,
                     description,
                     rarity,
+                    ringed,
                     landable,
                     explorable,
                     dist_from_arrival,
@@ -1472,10 +1550,11 @@ impl<'a> PlanetType<'a> {
             | PlanetType::GGWWBL(i) => 
             {
                 return Stats{
-                    ringed: i.ringed,
+                    label: i.type_label,
                     type_name: i.type_name,
                     description: i.description,
                     rarity: i.rarity.fetch_rarity(),
+                    ringed: i.ringed,
                     landable: i.landable,
                     explorable: i.explorable,
                     dist_from_arrival: i.dist_from_arrival,
