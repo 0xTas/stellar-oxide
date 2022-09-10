@@ -84,7 +84,7 @@ fn main() {
         wait(42);
         cls();
 
-        println!(" Options (spell these out):");
+        println!(" Options:");
         println!(" [AW, WW, WG, RKB, ICB, ELW, HMC, RIW, MRB, HGG, GGGG, CIGG, CIIGG, CIIIGG, CIVGG, CVGG, HRGG, GGWABL, GGWWBL]");
         println!(" What type of planet are you looking for?");
         print!("~> ");
@@ -96,17 +96,22 @@ fn main() {
             cls();
             let star: Star = create_random_star();
             let planet: Planet = create_random_planet();
-            println!("{:#?}", star);
-            for _ in 0..=69 { print!("-"); };
-            println!("\n{:#?}", planet);
             let answer_star: &str = answer_star.trim();
             let answer_planet: &str = answer_planet.trim();
             if star.stats().label == answer_star && planet.stats().label.to_lowercase() == answer_planet.to_lowercase() {
+                println!(" Generated requested combination: '{}' and '{}'.", answer_star, answer_planet);
                 println!();
+                println!(" {:#?}", star);
+                for _ in 0..=69 { print!("-"); };
+                println!("\n {:#?}", planet);
                 wait(30000);
                 break;
             }else {
+                println!(" Searching for combination: '{}' and '{}'...", answer_star, answer_planet);
                 println!();
+                println!(" {:#?}", star);
+                for _ in 0..=69 { print!("-"); };
+                println!("\n {:#?}", planet);
                 wait(2);
             };
 
