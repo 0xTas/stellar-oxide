@@ -5,10 +5,7 @@ use stellar_oxide::{cls, wait, input, create_random_star, create_random_planet};
 
 
 /* Current goal is to generate random star systems
-    and display various info about them in a loop.
-    
-    Future goal is to use that procedural API
-    as the foundation for the game's environment.*/
+    and display various info about them in a loop. */
 
 
 fn main() {
@@ -26,7 +23,7 @@ fn main() {
         wait(42);
         cls();
 
-        println!(" Options:");
+        println!(" Options (append \"(R)\" for ringed variants):");
         println!(" [AW, WW, WG, RKB, ICB, ELW, HMC, RIW, MRB, HGG, GGGG, CIGG, CIIGG, CIIIGG, CIVGG, CVGG, HRGG, GGWABL, GGWWBL]");
         println!(" What type of planet are you looking for?");
         print!("~> ");
