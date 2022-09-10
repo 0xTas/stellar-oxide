@@ -1,4 +1,3 @@
-// use rand::Rng;
 use stellar_oxide::bodies::stars::Star;
 use stellar_oxide::bodies::planets::Planet;
 use stellar_oxide::{cls, wait, input, create_random_star, create_random_planet};
