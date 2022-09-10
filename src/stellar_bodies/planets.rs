@@ -1496,7 +1496,7 @@ impl<'a> PlanetType<'a> {
 
 #[derive(Debug)]
 pub struct Planet<'a> {
-    pub name: &'a str,
+    pub name: String,
     pub ptype: PlanetType<'a>,
 }
 
@@ -1506,7 +1506,7 @@ impl<'a> Planet<'a> {
     ///
     /// **Valid Identifiers:**
     /// [AW, WW, WG, RKB, ICB, ELW, HMC, RIW, MRB, HGG, GGGG, CIGG, CIIGG, CIIIGG, CIVGG, CVGG, HRGG, GGWABL, GGWWBL]
-    pub fn new(name: &'a str, ptype: &'a str) -> Self {
+    pub fn new(name: String, ptype: &'a str) -> Self {
         match ptype {
             _ => return Planet{ name, ptype: PlanetType::new(ptype)},
         };
