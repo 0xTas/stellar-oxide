@@ -1,5 +1,6 @@
 use std::io;
 use std::io::Write;
+use rand::Rng;
 use clearscreen;
 use std::time::Duration;
 use std::thread::sleep;
@@ -55,14 +56,16 @@ impl Rarity {
 
 /// Returns a randomly-initialized instance of the *Star* struct.
 pub fn create_random_star() -> Star<'static> {
-    // TODO: source random names and subtypes
-    Star::new("Lorem Ipsum", "surprise me")
+    let name: String = format!("EC_Entry_{:#02x}", rand::thread_rng().gen_range(0x00..=0xffffff));
+    Star::new(name, "random")
 }
 
 /// Returns a randomly-initialized instance of the *Planet* struct.
 pub fn create_random_planet() -> Planet<'static> {
-    Planet::new("Lorem Ipsum 1", "random")
+    let name: String = format!("planet_{:#02x}", rand::thread_rng().gen_range(0x00..=0xffffff));
+    Planet::new(name, "random")
 }
+
 
 /* Utility Functions */
 
