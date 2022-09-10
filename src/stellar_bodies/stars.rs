@@ -2901,7 +2901,7 @@ impl<'a> StarClass<'a> {
 
 #[derive(Debug)]
 pub struct Star<'a> {
-    pub name: &'a str,
+    pub name: String,
     pub class: StarClass<'a>,
 }
 
@@ -2911,7 +2911,7 @@ impl<'a> Star<'a> {
     /// 
     /// **Valid Identifiers:**
     /// [O, OG, B, BG, A, AG, F, FG, G, GG, K, KG, M, MG, L, T, Y, AEBE, TTS, C, CJ, CN, MS, S, W, WC, WN, WNC, WO, NS, D, DA, DAB, DAV, DAZ, DB, DBV, DBZ, DC, DCV, DQ, BH]
-    pub fn new(name: &'a str, class: &'a str) -> Self {
+    pub fn new(name: String, class: &'a str) -> Self {
         let class = StarClass::new(class);
         Star {
             name,
