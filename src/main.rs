@@ -101,7 +101,7 @@ fn main() {
             println!("\n{:#?}", planet);
             let answer_star: &str = answer_star.trim();
             let answer_planet: &str = answer_planet.trim();
-            if star.stats().label == answer_star && planet.stats().type_name.to_lowercase() == answer_planet.to_lowercase() {
+            if star.stats().label == answer_star && planet.stats().label.to_lowercase() == answer_planet.to_lowercase() {
                 println!();
                 wait(30000);
                 break;
