@@ -31,19 +31,18 @@ fn main() {
                     let amount = rand::thread_rng().gen_range(42..=69);
                     wait(amount);
                 };
-                wait(1500);
+                wait(777);
                 println!("Done.");
                 wait(1000);
                 println!("");
 
                 let current_star: Star = create_random_star();
-                let star_stats = current_star.stats();
-                // println!(" Your Star: {:#?}", current_star);
+  
                 println!(" You've been here for quite some time already...");
                 println!(" Your current location is the system {}.\n It is a remote {} located on the far side of the galaxy.", current_star.name, current_star.stats().class_name);
                 wait(7000);
-                println!(" Here are the details of the current system's star:\n {:#?}", star_stats);
-                wait(20000);
+                println!(" Current: {:#?}", current_star);
+                wait(2000);
                 
                 let random_planet: Planet = create_random_planet();
                 println!();
