@@ -90,7 +90,7 @@ pub enum StarClass<'a> {
 /* Enables Fetching a random variant of the StarClass enum */
 impl<'a> Distribution<StarClass<'a>> for Standard {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> StarClass<'a> {
-        match rng.gen_range(0..42) {
+        match rng.gen_range(0..=41) {
             0 => StarClass::new("O"),
             1 => StarClass::new("OG"),
             2 => StarClass::new("B"),
@@ -630,8 +630,8 @@ impl<'a> StarClass<'a> {
                 const MAX_AGE: u64 = 11_994;
                 let age: u64 = rng().gen_range(MIN_AGE..=MAX_AGE);
 
-                const MIN_MASS: f64 = 45.8125;
-                const MAX_MASS: f64 = 4.769531;
+                const MIN_MASS: f64 = 4.769531;
+                const MAX_MASS: f64 = 45.8125;
                 let solar_masses: f64 = rng().gen_range(MIN_MASS..=MAX_MASS);
 
                 const MIN_RADIUS: f64 = 40.499396823391;
