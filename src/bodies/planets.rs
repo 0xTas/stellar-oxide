@@ -1586,9 +1586,7 @@ impl<'a> Planet<'a> {
     /// **Valid Identifiers:**
     /// [AW, WW, WG, RKB, ICB, ELW, HMC, RIW, MRB, HGG, GGGG, CIGG, CIIGG, CIIIGG, CIVGG, CVGG, HRGG, GGWABL, GGWWBL]
     pub fn new(name: String, ptype: &'a str) -> Self {
-        match ptype {
-            _ => return Planet{ name, ptype: PlanetType::new(ptype)},
-        };
+        Self{ name, ptype: PlanetType::new(ptype)}
     }
 
     /// Returns the *Stats* struct for the currently-calling *Planet* instance.
