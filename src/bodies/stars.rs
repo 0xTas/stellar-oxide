@@ -2921,7 +2921,6 @@ impl<'a> Star<'a> {
 
     /// Returns the *Stats* struct for the currently-calling *Star* instance.
     pub fn stats(&self) -> Stats {
-        let x: &StarClass = &self.class;
-        x.extract_stats()
+        self.class.extract_stats()
     }
 }
