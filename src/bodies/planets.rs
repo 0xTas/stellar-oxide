@@ -17,7 +17,7 @@ pub struct PlanetTypeProperties<'a> {
     pub landable: bool,
     pub explorable: bool,
     pub dist_from_arrival: f64, // Light-Seconds
-    pub surface_temp: i32, // Kelvin
+    pub surface_temp: f64, // Kelvin
     pub surface_pressure: f64, // Factors of Earth's Atmosphere
     pub radius: f64, // Kilometers
     pub earth_masses: f64,
@@ -36,7 +36,7 @@ pub struct Stats<'a> {
     pub landable: bool,
     pub explorable: bool,
     pub dist_from_arrival: f64,
-    pub surface_temp: i32,
+    pub surface_temp: f64,
     pub surface_pressure: f64,
     pub radius: f64,
     pub earth_masses: f64,
@@ -131,25 +131,27 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 81_7190.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 27;
-                const MAX_TEMP: i32 = 409;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.0;
                 const MAX_PRESSURE: f64 = 4_983_498.11683198;
-                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+                let rel_percentage_pressure: f64 = random_relative_percentage(MIN_PRESSURE, MAX_PRESSURE);
+                let surface_pressure: f64 = val_from_relative_percentage(MIN_PRESSURE, MAX_PRESSURE, rel_percentage_pressure);
 
-                const MIN_RADIUS: f64 = 2_699.66775;
-                const MAX_RADIUS: f64 = 30_741.622;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 27.0;
+                const MAX_TEMP: f64 = 409.0;
+                let surface_temp: f64 = val_from_relative_percentage(MIN_TEMP, MAX_TEMP, rel_percentage_pressure);
 
                 const MIN_MASSES: f64 = 0.07346;
                 const MAX_MASSES: f64 = 1_327.610718;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 2_699.66775;
+                const MAX_RADIUS: f64 = 30_741.622;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.249672518138;
                 const MAX_GRAVITY: f64 = 91.80329702145;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.258450279086;
                 const MAX_ORBITAL: f64 = 747_992.070736713;
@@ -206,21 +208,23 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 4_217_470.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 150;
-                const MAX_TEMP: i32 = 902;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.07; 
                 const MAX_PRESSURE: f64 = 6_319_180.5;
-                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+                let rel_percentage_pressure: f64 = random_relative_percentage(MIN_PRESSURE, MAX_PRESSURE);
+                let surface_pressure: f64 = val_from_relative_percentage(MIN_PRESSURE, MAX_PRESSURE, rel_percentage_pressure);
+
+                const MIN_TEMP: f64 = 150.0;
+                const MAX_TEMP: f64 = 902.0;
+                let surface_temp: f64 = val_from_relative_percentage(MIN_TEMP, MAX_TEMP, rel_percentage_pressure);
+
+                const MIN_MASSES: f64 = 0.0687;
+                const MAX_MASSES: f64 = 741.438171;
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
 
                 const MIN_RADIUS: f64 = 2_640.894;
                 const MAX_RADIUS: f64 = 29_011.342;
                 let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
-
-                const MIN_MASSES: f64 = 0.0687;
-                const MAX_MASSES: f64 = 741.438171;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
 
                 const MIN_GRAVITY: f64 = 0.250068247718;
                 const MAX_GRAVITY: f64 = 46.013426658406;
@@ -281,25 +285,27 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 690_129.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 136;
-                const MAX_TEMP: i32 = 2_715;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 1337.4206969;
                 const MAX_PRESSURE: f64 = 29_501_937_664.0;
-                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+                let rel_percentage_pressure: f64 = random_relative_percentage(MIN_PRESSURE, MAX_PRESSURE);
+                let surface_pressure: f64 = val_from_relative_percentage(MIN_PRESSURE, MAX_PRESSURE, rel_percentage_pressure);
 
-                const MIN_RADIUS: f64 = 15_892.973;
-                const MAX_RADIUS: f64 = 30_942.572;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 136.0;
+                const MAX_TEMP: f64 = 2_715.0;
+                let surface_temp: f64 = val_from_relative_percentage(MIN_TEMP, MAX_TEMP, rel_percentage_pressure);
 
                 const MIN_MASSES: f64 = 17.23122;
                 const MAX_MASSES: f64 = 1_961.928589;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 15_892.973;
+                const MAX_RADIUS: f64 = 30_942.572;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 2.298430556431;
                 const MAX_GRAVITY: f64 = 193.710734791427;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.780787489155;
                 const MAX_ORBITAL: f64 = 38_728.2255623079;
@@ -356,25 +362,27 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 7_492_300.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 20;
-                const MAX_TEMP: i32 = 51_171;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.0;
                 const MAX_PRESSURE: f64 = 2_516_369_920.0;
-                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+                let rel_percentage_pressure: f64 = random_relative_percentage(MIN_PRESSURE, MAX_PRESSURE);
+                let surface_pressure: f64 = val_from_relative_percentage(MIN_PRESSURE, MAX_PRESSURE, rel_percentage_pressure);
 
-                const MIN_RADIUS: f64 = 181.887875;
-                const MAX_RADIUS: f64 = 21_765.112;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 20.0;
+                const MAX_TEMP: f64 = 51_171.0;
+                let surface_temp: f64 = val_from_relative_percentage(MIN_TEMP, MAX_TEMP, rel_percentage_pressure);
 
                 const MIN_MASSES: f64 = 0.0001;
                 const MAX_MASSES: f64 = 527.839539;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 181.887875;
+                const MAX_RADIUS: f64 = 21_765.112;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.007895669291;
                 const MAX_GRAVITY: f64 = 50.039830862644;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.001000000046;
                 const MAX_ORBITAL: f64 = 12_163.6164409143;
@@ -431,25 +439,27 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 15_653_000.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 1;
-                const MAX_TEMP: i32 = 4_020;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.0;
                 const MAX_PRESSURE: f64 = 204_413_011.941219;
-                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+                let rel_percentage_pressure: f64 = random_relative_percentage(MIN_PRESSURE, MAX_PRESSURE);
+                let surface_pressure: f64 = val_from_relative_percentage(MIN_PRESSURE, MAX_PRESSURE, rel_percentage_pressure);
 
-                const MIN_RADIUS: f64 = 160.0;
-                const MAX_RADIUS: f64 = 31_232.91;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 1.0;
+                const MAX_TEMP: f64 = 4_020.0;
+                let surface_temp: f64 = val_from_relative_percentage(MIN_TEMP, MAX_TEMP, rel_percentage_pressure);
 
                 const MIN_MASSES: f64 = 0.0001;
                 const MAX_MASSES: f64 = 2_214.019287;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 160.0;
+                const MAX_RADIUS: f64 = 31_232.91;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.004758505708;
                 const MAX_GRAVITY: f64 = 236.648152852392;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.000104166667;
                 const MAX_ORBITAL: f64 = 1_257_206_278.81862;
@@ -506,25 +516,27 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 736_306.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 260;
-                const MAX_TEMP: i32 = 497;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.24206969;
                 const MAX_PRESSURE: f64 = 7.291643844066;
-                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+                let rel_percentage_pressure: f64 = random_relative_percentage(MIN_PRESSURE, MAX_PRESSURE);
+                let surface_pressure: f64 = val_from_relative_percentage(MIN_PRESSURE, MAX_PRESSURE, rel_percentage_pressure);
 
-                const MIN_RADIUS: f64 = 1_944.26225;
-                const MAX_RADIUS: f64 = 11_914.006;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 260.0;
+                const MAX_TEMP: f64 = 497.0;
+                let surface_temp: f64 = val_from_relative_percentage(MIN_TEMP, MAX_TEMP, rel_percentage_pressure);
 
                 const MIN_MASSES: f64 = 0.026;
                 const MAX_MASSES: f64 = 7.1;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 1_944.26225;
+                const MAX_RADIUS: f64 = 11_914.006;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.279545410512;
                 const MAX_GRAVITY: f64 = 2.553103251365;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.279575634606;
                 const MAX_ORBITAL: f64 = 271_840.426666667;
@@ -581,25 +593,27 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 7_488_550.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 20;
-                const MAX_TEMP: i32 = 46_100;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.0;
                 const MAX_PRESSURE: f64 = 38_894_529_198.7091;
-                let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
+                let rel_percentage_pressure: f64 = random_relative_percentage(MIN_PRESSURE, MAX_PRESSURE);
+                let surface_pressure: f64 = val_from_relative_percentage(MIN_PRESSURE, MAX_PRESSURE, rel_percentage_pressure);
 
-                const MIN_RADIUS: f64 = 210.242671875;
-                const MAX_RADIUS: f64 = 72_253.984;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 20.0;
+                const MAX_TEMP: f64 = 46_100.0;
+                let surface_temp: f64 = val_from_relative_percentage(MIN_TEMP, MAX_TEMP, rel_percentage_pressure);
 
                 const MIN_MASSES: f64 = 0.0001;
                 const MAX_MASSES: f64 = 1_397.998047;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 210.242671875;
+                const MAX_RADIUS: f64 = 72_253.984;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.028504229273;
                 const MAX_GRAVITY: f64 = 228.220131339448;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.005607748738;
                 const MAX_ORBITAL: f64 = 111_160_422.502844;
@@ -656,25 +670,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 5_339_010.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 20;
-                const MAX_TEMP: i32 = 15_742;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.0;
                 const MAX_PRESSURE: f64 = 253_668_685.603375;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 276.0;
-                const MAX_RADIUS: f64 = 28_515.804;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 20.0;
+                const MAX_TEMP: f64 = 15_742.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 0.000107;
                 const MAX_MASSES: f64 = 298.62381;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 276.0;
+                const MAX_RADIUS: f64 = 28_515.804;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.001378452377;
                 const MAX_GRAVITY: f64 = 17.259812728912;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.167619572396;
                 const MAX_ORBITAL: f64 = 58_634_326.6897731;
@@ -731,25 +746,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 7_489_630.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 20;
-                const MAX_TEMP: i32 = 47_991;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.0;
                 const MAX_PRESSURE: f64 = 43_050_307_445.3848;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 137.38325;
-                const MAX_RADIUS: f64 = 20_739.046;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 20.0;
+                const MAX_TEMP: f64 = 47_991.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 0.0001;
                 const MAX_MASSES: f64 = 715.209778;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 137.38325;
+                const MAX_RADIUS: f64 = 20_739.046;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.029231388904;
                 const MAX_GRAVITY: f64 = 199.958389460213;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.005403750475;
                 const MAX_ORBITAL: f64 = 70_018_026.7018299;
@@ -806,25 +822,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 5_542.96;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 53;
-                const MAX_TEMP: i32 = 1_701;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.0;
                 const MAX_PRESSURE: f64 = 30_887.2179620035;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 16_762.012;
-                const MAX_RADIUS: f64 = 75_900.72;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 53.0;
+                const MAX_TEMP: f64 = 1_701.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 9.003934;
                 const MAX_MASSES: f64 = 5_781.101074;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 16_762.012;
+                const MAX_RADIUS: f64 = 75_900.72;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 1.30247301576;
                 const MAX_GRAVITY: f64 = 515.948083392392;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 30.12353209434;
                 const MAX_ORBITAL: f64 = 10_178.4751922996;
@@ -881,25 +898,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 4_200_069.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 100;
-                const MAX_TEMP: i32 = 150;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 4.20696969;
                 const MAX_PRESSURE: f64 = 420.696969;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 9_010.666;
-                const MAX_RADIUS: f64 = 77_777.420;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 100.0;
+                const MAX_TEMP: f64 = 150.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 1.77777777;
                 const MAX_MASSES: f64 = 910.69696969;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 9_010.666;
+                const MAX_RADIUS: f64 = 77_777.420;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.2420420420;
                 const MAX_GRAVITY: f64 = 20.4;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.01337;
                 const MAX_ORBITAL: f64 = 3_333_420.696969;
@@ -956,25 +974,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 4_404_300.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 1;
-                const MAX_TEMP: i32 = 150;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.0;
                 const MAX_PRESSURE: f64 = 0.00379244308;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 8_079.091;
-                const MAX_RADIUS: f64 = 77_787.584;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 1.0;
+                const MAX_TEMP: f64 = 150.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 0.734365;
                 const MAX_MASSES: f64 = 911.079224;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 8_079.091;
+                const MAX_RADIUS: f64 = 77_787.584;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.191422307729;
                 const MAX_GRAVITY: f64 = 19.845980443942;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.001108796332;
                 const MAX_ORBITAL: f64 = 584_242_168.67597;
@@ -1031,25 +1050,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 841_899.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 61;
-                const MAX_TEMP: i32 = 250;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.0;
                 const MAX_PRESSURE: f64 = 0.243458896875;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 10_222.803;
-                const MAX_RADIUS: f64 = 90_000.0;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 61.0;
+                const MAX_TEMP: f64 = 250.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 2.641097;
                 const MAX_MASSES: f64 = 1_368.457764;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 10_222.803;
+                const MAX_RADIUS: f64 = 90_000.0;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.252062726485;
                 const MAX_GRAVITY: f64 = 24.584892915592;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.135475762743;
                 const MAX_ORBITAL: f64 = 20_275_545.7549183;
@@ -1106,25 +1126,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 7_492_280.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 115;
-                const MAX_TEMP: i32 = 800;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.0;
                 const MAX_PRESSURE: f64 = 20_305.728515625;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 12_120.956;
-                const MAX_RADIUS: f64 = 77_849.944;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 115.0;
+                const MAX_TEMP: f64 = 800.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 4.296463;
                 const MAX_MASSES: f64 = 3_457.905762;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 12_120.956;
+                const MAX_RADIUS: f64 = 77_849.944;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.274524836901;
                 const MAX_GRAVITY: f64 = 199.304829579928;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.018557870653;
                 const MAX_ORBITAL: f64 = 106_016_638.240329;
@@ -1181,25 +1202,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 7_492_300.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 800;
-                const MAX_TEMP: i32 = 1450;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.420;
                 const MAX_PRESSURE: f64 = 30_707.168942;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 17_305.224;
-                const MAX_RADIUS: f64 = 78_291.304;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 800.0;
+                const MAX_TEMP: f64 = 1450.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 16.754765;
                 const MAX_MASSES: f64 = 5_403.108398;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 17_305.224;
+                const MAX_RADIUS: f64 = 78_291.304;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.441846796047;
                 const MAX_GRAVITY: f64 = 71.175610458804;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.01965354213;
                 const MAX_ORBITAL: f64 = 4_126_230.75555556;
@@ -1256,25 +1278,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 697_615.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 1_400;
-                const MAX_TEMP: i32 = 13_712;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.420;
                 const MAX_PRESSURE: f64 = 33_333.333;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 20_016.274;
-                const MAX_RADIUS: f64 = 77_806.056;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 1_400.0;
+                const MAX_TEMP: f64 = 13_712.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 32.504833;
                 const MAX_MASSES: f64 = 13_063.395508;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 20_016.274;
+                const MAX_RADIUS: f64 = 77_806.056;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.593483029343;
                 const MAX_GRAVITY: f64 = 404.862526550861;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.007973187153;
                 const MAX_ORBITAL: f64 = 4_133_050.70941095;
@@ -1331,25 +1354,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 731_999.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 1;
-                const MAX_TEMP: i32 = 7_787;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 0.0;
                 const MAX_PRESSURE: f64 = 37_777.7;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 9_557.561;
-                const MAX_RADIUS: f64 = 77_743.44;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 1.0;
+                const MAX_TEMP: f64 = 7_787.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 1.028593;
                 const MAX_MASSES: f64 = 4_764.864258;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 9_557.561;
+                const MAX_RADIUS: f64 = 77_743.44;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.244444247333;
                 const MAX_GRAVITY: f64 = 81.245461374845;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.16154257787;
                 const MAX_ORBITAL: f64 = 2_572_298.80888889;
@@ -1406,25 +1430,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 4_217_110.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 100;
-                const MAX_TEMP: i32 = 150;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 4.20;
                 const MAX_PRESSURE: f64 = 69_696.9;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 9_089.773;
-                const MAX_RADIUS: f64 = 77_785.448;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 100.0;
+                const MAX_TEMP: f64 = 150.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 1.791545;
                 const MAX_MASSES: f64 = 909.972778;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 10_265.455;
+                const MAX_RADIUS: f64 = 77_844.096;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.245295452982;
                 const MAX_GRAVITY: f64 = 18.147572568807;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.015803241023;
                 const MAX_ORBITAL: f64 = 3_331_479.58196979;
@@ -1481,25 +1506,26 @@ impl<'a> PlanetType<'a> {
                 const MAX_DIST: f64 = 4_214_690.0;
                 let dist_from_arrival: f64 = rng().gen_range(MIN_DIST..=MAX_DIST);
 
-                const MIN_TEMP: i32 = 150;
-                const MAX_TEMP: i32 = 250;
-                let surface_temp: i32 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
-
                 const MIN_PRESSURE: f64 = 4.20;
                 const MAX_PRESSURE: f64 = 69_420.420691337;
                 let surface_pressure: f64 = rng().gen_range(MIN_PRESSURE..=MAX_PRESSURE);
 
-                const MIN_RADIUS: f64 = 10_265.455;
-                const MAX_RADIUS: f64 = 77_844.096;
-                let radius: f64 = rng().gen_range(MIN_RADIUS..=MAX_RADIUS);
+                const MIN_TEMP: f64 = 150.0;
+                const MAX_TEMP: f64 = 250.0;
+                let surface_temp: f64 = rng().gen_range(MIN_TEMP..=MAX_TEMP);
 
                 const MIN_MASSES: f64 = 2.590262;
                 const MAX_MASSES: f64 = 1_367.778809;
-                let earth_masses: f64 = rng().gen_range(MIN_MASSES..=MAX_MASSES);
+                let rel_percentage_mass: f64 = random_relative_percentage(MIN_MASSES, MAX_MASSES);
+                let earth_masses: f64 = val_from_relative_percentage(MIN_MASSES, MAX_MASSES, rel_percentage_mass);
+
+                const MIN_RADIUS: f64 = 10_265.455;
+                const MAX_RADIUS: f64 = 77_844.096;
+                let radius: f64 = val_from_relative_percentage(MIN_RADIUS, MAX_RADIUS, rel_percentage_mass);
 
                 const MIN_GRAVITY: f64 = 0.252151647889;
                 const MAX_GRAVITY: f64 = 26.734562844827;
-                let gravity: f64 = rng().gen_range(MIN_GRAVITY..=MAX_GRAVITY);
+                let gravity: f64 = val_from_relative_percentage(MIN_GRAVITY, MAX_GRAVITY, rel_percentage_mass);
 
                 const MIN_ORBITAL: f64 = 0.002035879559;
                 const MAX_ORBITAL: f64 = 16_447_556.1016134;
@@ -1600,8 +1626,8 @@ impl<'a> Planet<'a> {
 /* Planetary Util Functions */
 
 /// Uses pressure and tempurature to determine whether or not the environment is safe to land a spaceship on.
-fn is_landable(pressure: f64, temp: i32) -> bool {
-    if pressure <= 4.20 && temp <= 666 {
+fn is_landable(pressure: f64, temp: f64) -> bool {
+    if pressure <= 4.20 && temp <= 666.0 {
         return true;
     }else {
         return false;
@@ -1609,10 +1635,25 @@ fn is_landable(pressure: f64, temp: i32) -> bool {
 }
 
 /// Uses pressure, tempurature, and gravity to determine if the environment is fit for on-foot exploration.
-fn is_explorable(pressure: f64, temp: i32, gravity: f64) -> bool {
-    if pressure <= 2.25 && temp <= 370 && gravity <= 4.20 {
+fn is_explorable(pressure: f64, temp: f64, gravity: f64) -> bool {
+    if pressure <= 2.25 && temp <= 370.0 && gravity <= 4.20 {
         return true;
     }else {
         return false;
     };
+}
+
+/// Returns a random position within a range of numbers (min, max), represented as a relative percentage of that range.
+fn random_relative_percentage(min: f64, max: f64) -> f64 {
+    let n = rng().gen_range(min..=max);
+
+    // Formula for relative percentage of the range.
+    ((n - min) / (max - min)) * 100.0
+}
+
+/// Returns a value representing the position found at a given percentage of a given range of numbers.
+fn val_from_relative_percentage(min: f64, max: f64, percentage: f64) -> f64 {
+    let perc_as_dec = percentage / 100.0;
+
+    min + (max - min) * perc_as_dec
 }
