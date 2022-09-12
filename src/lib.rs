@@ -130,7 +130,7 @@ mod tests {
 
     #[test]
     // #[ignore]
-    fn test_random_star() {
+    fn test_random_stars() {
         for _ in 1..=420069 {
             let star: Star = create_random_star();
             println!("{:#?}", star);
@@ -147,7 +147,7 @@ mod tests {
 
     #[test]
     // #[ignore]
-    fn test_random_planet() {
+    fn test_random_planets() {
         for _ in 1..=420069 {
             let planet: Planet = create_random_planet();
             println!("{:#?}", planet);

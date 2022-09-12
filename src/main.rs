@@ -13,7 +13,7 @@ fn main() {
         /* Main Loop */
         cls();
         println!(" Options:");
-        println!(" [O, OG, B, BG, A, AG, F, FG, G, GG, K, KG, M, MG, L, T, Y, AEBE, TTS, C, CJ, CN, MS, S, 
+        println!(" [O, OG, B, BG, A, AG, F, FG, G, GG, K, KG, M, MG, L, T, Y, AE/BE, TTS, C, CJ, CN, MS, S, 
         W, WC, WN, WNC, WO, NS, D, DA, DAB, DAV, DAZ, DB, DBV, DBZ, DC, DCV, DQ, BH]");
         println!(" What class of star are you looking for?");
         print!("~> ");
