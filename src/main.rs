@@ -41,9 +41,9 @@ fn main() {
                 println!(" Generated requested combination: '{}' and '{}'.", answer_star.to_uppercase(), answer_planet.to_uppercase());
                 println!();
                 println!(" {:#?}", star);
-                for _ in 0..=34 { print!("-"); };
+                for _ in 0..=17 { print!("-"); };
                 print!("| Iterations: {} |", iter);
-                for _ in 0..=35 { print!("-"); };
+                for _ in 0..=18 { print!("-"); };
                 println!("\n {:#?}", planet);
                 wait(30000);
                 break;
@@ -51,9 +51,9 @@ fn main() {
                 println!(" Searching for combination: '{}' and '{}'...", answer_star.to_uppercase(), answer_planet.to_uppercase());
                 println!();
                 println!(" {:#?}", star);
-                for _ in 0..=34 { print!("-"); };
+                for _ in 0..=17 { print!("-"); };
                 print!("| Iterations: {} |", iter);
-                for _ in 0..=35 { print!("-"); };
+                for _ in 0..=18 { print!("-"); };
                 println!("\n {:#?}", planet);
                 wait(1);
             };
