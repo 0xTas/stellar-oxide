@@ -34,11 +34,11 @@ fn main() {
             cls();
             let star: Star = create_random_star();
             let planet: Planet = create_random_planet();
-            let answer_s: String = answer_star.trim().to_lowercase();
-            let answer_p: String = answer_planet.trim().to_lowercase();
+            let answer_star: String = answer_star.trim().to_lowercase();
+            let answer_planet: String = answer_planet.trim().to_lowercase();
             iter += 1;
-            if star.stats().label.to_lowercase() == answer_s && planet.stats().label.to_lowercase() == answer_p {
-                println!(" Generated requested combination: '{}' and '{}'.", answer_star, answer_planet);
+            if star.stats().label.to_lowercase() == answer_star && planet.stats().label.to_lowercase() == answer_planet {
+                println!(" Generated requested combination: '{}' and '{}'.", answer_star.to_uppercase(), answer_planet.to_uppercase());
                 println!();
                 println!(" {:#?}", star);
                 for _ in 0..=34 { print!("-"); };
@@ -48,7 +48,7 @@ fn main() {
                 wait(30000);
                 break;
             }else {
-                println!(" Searching for combination: '{}' and '{}'...", answer_star, answer_planet);
+                println!(" Searching for combination: '{}' and '{}'...", answer_star.to_uppercase(), answer_planet.to_uppercase());
                 println!();
                 println!(" {:#?}", star);
                 for _ in 0..=34 { print!("-"); };
