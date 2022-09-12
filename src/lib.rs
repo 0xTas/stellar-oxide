@@ -66,6 +66,18 @@ pub fn create_random_planet<'a>() -> Planet<'a> {
     Planet::new(name, "random")
 }
 
+/// Returns a randomly-initialized instance of the *Star* struct with the given name and class.
+/// Accepts *&str* StarClass identifiers or "random" for a random star class.
+pub fn create_named_star<'a>(name: String, star_class: &'a str) -> Star<'a> {
+    Star::new(name, star_class)
+}
+
+/// Returns a randomly-initialized instance of the *Planet* struct with the given name and type.
+/// Accepts *&str* Planet type identifiers or "random" for a random planet type.
+pub fn create_named_planet<'a>(name: String, ptype: &'a str) -> Planet<'a> {
+    Planet::new(name, ptype)
+}
+
 
 /* Utility Functions */
 
@@ -109,9 +121,11 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
-    fn test_cls() {
-        cls();
+    fn test_named_star() {
+        let name: String = String::from("Sol");
+        let star_class: &str = "G";
+        let sun: Star = create_named_star(name, star_class);
+        println!("{:#?}", sun);
     }
 
     #[test]
@@ -121,6 +135,14 @@ mod tests {
             let star: Star = create_random_star();
             println!("{:#?}", star);
         };
+    }
+
+    #[test]
+    fn test_named_planet() {
+        let name: String = String::from("Earth");
+        let ptype: &str = "ELW";
+        let earth: Planet = create_named_planet(name, ptype);
+        println!("{:#?}", earth);
     }
 
     #[test]
