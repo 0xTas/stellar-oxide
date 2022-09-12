@@ -29,18 +29,21 @@ fn main() {
         wait(0);
         let answer_planet: String = input();
         wait(420);
-
+        let mut iter: i32 = 0;
         loop {
             cls();
             let star: Star = create_random_star();
             let planet: Planet = create_random_planet();
-            let answer_star: &str = answer_star.trim();
-            let answer_planet: &str = answer_planet.trim();
-            if star.stats().label == answer_star && planet.stats().label.to_lowercase() == answer_planet.to_lowercase() {
+            let answer_star: &str = answer_star.trim().to_lowercase().as_str();
+            let answer_planet: &str = answer_planet.trim().to_lowercase().as_str();
+            iter += 1;
+            if star.stats().label.to_lowercase() == answer_star && planet.stats().label.to_lowercase() == answer_planet {
                 println!(" Generated requested combination: '{}' and '{}'.", answer_star, answer_planet);
                 println!();
                 println!(" {:#?}", star);
-                for _ in 0..=69 { print!("-"); };
+                for _ in 0..=34 { print!("-"); };
+                print!("| Iterations: {} |", iter);
+                for _ in 0..=35 { print!("-"); };
                 println!("\n {:#?}", planet);
                 wait(30000);
                 break;
@@ -48,9 +51,11 @@ fn main() {
                 println!(" Searching for combination: '{}' and '{}'...", answer_star, answer_planet);
                 println!();
                 println!(" {:#?}", star);
-                for _ in 0..=69 { print!("-"); };
+                for _ in 0..=34 { print!("-"); };
+                print!("| Iterations: {} |", iter);
+                for _ in 0..=35 { print!("-"); };
                 println!("\n {:#?}", planet);
-                wait(2);
+                wait(1);
             };
 
         }
