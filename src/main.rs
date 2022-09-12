@@ -45,7 +45,9 @@ fn main() {
                 print!("| Iterations: {} |", iter);
                 for _ in 0..=18 { print!("-"); };
                 println!("\n {:#?}", planet);
-                wait(30000);
+                print!("\n Press Enter to Continue...");
+                wait(1);
+                let _continue: String = input();
                 break;
             }else {
                 println!(" Searching for combination: '{}' and '{}'...", answer_star.to_uppercase(), answer_planet.to_uppercase());
