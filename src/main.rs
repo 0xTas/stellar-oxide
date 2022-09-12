@@ -34,10 +34,10 @@ fn main() {
             cls();
             let star: Star = create_random_star();
             let planet: Planet = create_random_planet();
-            let answer_star: &str = answer_star.trim().to_lowercase().as_str();
-            let answer_planet: &str = answer_planet.trim().to_lowercase().as_str();
+            let answer_s: String = answer_star.trim().to_lowercase();
+            let answer_p: String = answer_planet.trim().to_lowercase();
             iter += 1;
-            if star.stats().label.to_lowercase() == answer_star && planet.stats().label.to_lowercase() == answer_planet {
+            if star.stats().label.to_lowercase() == answer_s && planet.stats().label.to_lowercase() == answer_p {
                 println!(" Generated requested combination: '{}' and '{}'.", answer_star, answer_planet);
                 println!();
                 println!(" {:#?}", star);
