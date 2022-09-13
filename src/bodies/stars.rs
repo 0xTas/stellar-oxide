@@ -144,7 +144,7 @@ impl<'a> StarClass<'a> {
     /// Accepts desired class identifier as a &str, but will return a random *StarClass* if an invalid identifier is given.
     /// 
     /// **Valid Identifiers:**
-    /// [O, OG, B, BG, A, AG, F, FG, G, GG, K, KG, M, MG, L, T, Y, AEBE, TTS, C, CJ, CN, MS, S, W, WC, WN, WNC, WO, NS, D, DA, DAB, DAV, DAZ, DB, DBV, DBZ, DC, DCV, DQ, BH]
+    /// [O, OG, B, BG, A, AG, F, FG, G, GG, K, KG, M, MG, L, T, Y, AE/BE, TTS, C, CJ, CN, MS, S, W, WC, WN, WNC, WO, NS, D, DA, DAB, DAV, DAZ, DB, DBV, DBZ, DC, DCV, DQ, BH]
     pub fn new(class: &str) -> Self {
 
         /* Here is where most property values of different star classes are assigned */
@@ -2910,7 +2910,7 @@ impl<'a> Star<'a> {
     /// Expects a name and class identifier, will return with a random *StarClass* if an invalid identifier string is provided.
     /// 
     /// **Valid Identifiers:**
-    /// [O, OG, B, BG, A, AG, F, FG, G, GG, K, KG, M, MG, L, T, Y, AEBE, TTS, C, CJ, CN, MS, S, W, WC, WN, WNC, WO, NS, D, DA, DAB, DAV, DAZ, DB, DBV, DBZ, DC, DCV, DQ, BH]
+    /// [O, OG, B, BG, A, AG, F, FG, G, GG, K, KG, M, MG, L, T, Y, AE/BE, TTS, C, CJ, CN, MS, S, W, WC, WN, WNC, WO, NS, D, DA, DAB, DAV, DAZ, DB, DBV, DBZ, DC, DCV, DQ, BH]
     pub fn new(name: String, class: &'a str) -> Self {
         let class = StarClass::new(class);
         Star {
